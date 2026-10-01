@@ -1,0 +1,2127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Winter Block · 150 → 157</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;800&family=IBM+Plex+Mono:wght@500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  color-scheme: light dark;
+  --bg:#f6f4f0; --panel:#ffffff; --panel2:#efece6; --ink:#17150f; --ink2:#6b655a;
+  --line:#ded8cd; --accent:#b4541b; --accent2:#7a8f3a; --warn:#9a5b00;
+  --shadow:0 1px 2px rgba(23,21,15,.06),0 6px 18px rgba(23,21,15,.05);
+  box-sizing:border-box;
+  padding-top:env(safe-area-inset-top,0px);
+  padding-bottom:env(safe-area-inset-bottom,0px);
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#111010; --panel:#1b1a18; --panel2:#232120; --ink:#f2efe9; --ink2:#9a948a;
+    --line:#312e2b; --accent:#e8813f; --accent2:#a8c24e; --warn:#d69a3c;
+    --shadow:0 1px 2px rgba(0,0,0,.4),0 6px 18px rgba(0,0,0,.3);
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#111010; --panel:#1b1a18; --panel2:#232120; --ink:#f2efe9; --ink2:#9a948a;
+  --line:#312e2b; --accent:#e8813f; --accent2:#a8c24e; --warn:#d69a3c;
+  --shadow:0 1px 2px rgba(0,0,0,.4),0 6px 18px rgba(0,0,0,.3);
+}
+*,*::before,*::after{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%; scroll-padding-top:env(safe-area-inset-top,0px)}
+body{
+  margin:0; background:var(--bg); color:var(--ink);
+  font-family:'Archivo',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;
+  font-weight:500; line-height:1.45; -webkit-font-smoothing:antialiased; padding-bottom:90px;
+}
+.num{font-family:'IBM Plex Mono',ui-monospace,SFMono-Regular,Menlo,monospace; font-variant-numeric:tabular-nums}
+.wrap{max-width:720px; margin:0 auto; padding:0 16px}
+header{padding:20px 16px 12px; max-width:720px; margin:0 auto; display:flex; align-items:flex-start; gap:12px}
+header h1{font-size:19px; font-weight:800; margin:0; letter-spacing:-.02em; line-height:1.2}
+header p{margin:2px 0 0; font-size:12.5px; color:var(--ink2)}
+#themeBtn{margin-left:auto; background:var(--panel); border:1px solid var(--line); color:var(--ink2);
+  border-radius:10px; width:38px; height:38px; font-size:15px; cursor:pointer; flex:none}
+.card{background:var(--panel); border:1px solid var(--line); border-radius:16px; padding:16px; margin-bottom:12px; box-shadow:var(--shadow)}
+.card h2{font-size:12px; font-weight:800; letter-spacing:.1em; text-transform:uppercase; color:var(--ink2); margin:0 0 12px}
+.card h3{font-size:14.5px; font-weight:800; margin:18px 0 6px; letter-spacing:-.01em}
+.card h3:first-of-type{margin-top:0}
+.hero{display:flex; align-items:baseline; gap:10px; flex-wrap:wrap}
+.hero .big{font-size:44px; font-weight:800; letter-spacing:-.04em; line-height:1}
+.hero .unit{font-size:15px; color:var(--ink2); font-weight:600}
+.hero .delta{margin-left:auto; font-size:13px; font-weight:600; padding:4px 9px; border-radius:99px; background:var(--panel2); color:var(--ink2)}
+.bar{height:9px; background:var(--panel2); border-radius:99px; overflow:hidden; margin:14px 0 7px; border:1px solid var(--line)}
+.bar i{display:block; height:100%; background:linear-gradient(90deg,var(--accent2),var(--accent)); border-radius:99px; transition:width .4s ease}
+.barlabels{display:flex; justify-content:space-between; font-size:11.5px; color:var(--ink2)}
+.grid{display:grid; grid-template-columns:repeat(2,1fr); gap:10px}
+.stat{background:var(--panel2); border-radius:12px; padding:11px 12px}
+.stat b{display:block; font-size:21px; font-weight:800; letter-spacing:-.02em}
+.stat span{font-size:10.5px; text-transform:uppercase; letter-spacing:.07em; color:var(--ink2); font-weight:600}
+label.fld{display:block; font-size:11px; text-transform:uppercase; letter-spacing:.07em; color:var(--ink2); font-weight:700; margin-bottom:5px}
+input[type=number],input[type=text]{width:100%; background:var(--panel2); border:1px solid var(--line); color:var(--ink);
+  border-radius:11px; padding:11px 12px; font-size:17px; font-weight:600;
+  font-family:'IBM Plex Mono',monospace; font-variant-numeric:tabular-nums}
+input:focus{outline:2px solid var(--accent); outline-offset:1px}
+.row{display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-bottom:10px}
+button.primary{width:100%; background:var(--accent); color:#fff; border:0; border-radius:12px;
+  padding:13px; font-size:15px; font-weight:800; font-family:inherit; cursor:pointer; letter-spacing:-.01em}
+button.primary:active{transform:scale(.99)}
+.saved{font-size:12px; color:var(--accent2); text-align:center; margin-top:9px; min-height:16px; font-weight:600}
+.seg{display:flex; gap:6px}
+.seg button{flex:1; background:var(--panel2); border:1px solid var(--line); color:var(--ink2); border-radius:10px;
+  padding:9px 4px; font-size:12px; font-weight:800; font-family:inherit; cursor:pointer; line-height:1.3}
+.seg button small{display:block; font-size:10px; font-weight:600; opacity:.8}
+.seg button[aria-selected=true]{background:var(--accent); border-color:var(--accent); color:#fff}
+.calrow{display:flex; align-items:center; gap:10px; margin-top:12px}
+.calrow .v{font-size:26px; font-weight:800; letter-spacing:-.03em; flex:1}
+.calrow button{width:44px; height:40px; border-radius:10px; border:1px solid var(--line); background:var(--panel2);
+  color:var(--ink); font-size:18px; font-weight:800; font-family:inherit; cursor:pointer}
+.macrobar{display:flex; height:28px; border-radius:9px; overflow:hidden; border:1px solid var(--line); margin-top:4px}
+.macrobar div{display:flex; align-items:center; justify-content:center; font-size:10.5px; font-weight:800; color:#fff}
+table{width:100%; border-collapse:collapse; font-size:13.5px}
+td{padding:7px 0; border-bottom:1px solid var(--line); vertical-align:top}
+tr:last-child td{border-bottom:0}
+td.r{text-align:right; color:var(--ink2); white-space:nowrap; padding-left:10px}
+.meal{background:var(--panel2); border-radius:13px; padding:13px; margin-bottom:10px}
+.meal .mh{display:flex; align-items:baseline; gap:8px; margin-bottom:6px; flex-wrap:wrap}
+.meal .mh b{font-size:14.5px; font-weight:800; letter-spacing:-.01em}
+.meal .mh span{margin-left:auto; font-size:11px; color:var(--ink2); font-weight:700; white-space:nowrap}
+ul{margin:6px 0 0; padding-left:18px; font-size:13.5px}
+li{margin-bottom:5px}
+p.note{font-size:13px; color:var(--ink2); margin:8px 0 0}
+p.method{font-size:13px; color:var(--ink2); margin:8px 0 0; line-height:1.5}
+.daysel{display:flex; gap:6px; margin-bottom:14px; overflow-x:auto; padding-bottom:2px}
+.daysel button{flex:1; min-width:64px; background:var(--panel2); border:1px solid var(--line); color:var(--ink2);
+  border-radius:10px; padding:9px 4px; font-size:12px; font-weight:800; font-family:inherit; cursor:pointer}
+.daysel button[aria-selected=true]{background:var(--accent); border-color:var(--accent); color:#fff}
+.lift{display:grid; grid-template-columns:1fr auto auto; gap:7px; align-items:center; padding:8px 0; border-bottom:1px solid var(--line)}
+.lift:last-child{border-bottom:0}
+.lift .ln{font-size:13.5px; font-weight:700; line-height:1.25}
+.lift .ln em{display:block; font-style:normal; font-size:11px; color:var(--ink2); font-weight:600}
+.lift input{width:62px; padding:8px 6px; font-size:14px; text-align:center}
+.lift .last{font-size:11px; color:var(--ink2); width:62px; text-align:right}
+.qgrid{display:flex; flex-wrap:wrap; gap:7px}
+.qgrid button{background:var(--panel2); border:1px solid var(--line); color:var(--ink); border-radius:11px;
+  padding:9px 12px; font-size:13px; font-weight:700; font-family:inherit; cursor:pointer; text-align:left; line-height:1.3}
+.qgrid button small{display:block; font-size:10.5px; font-weight:600; color:var(--ink2); margin-top:1px}
+.qgrid button[aria-pressed=true]{background:var(--accent); border-color:var(--accent); color:#fff}
+.qgrid button[aria-pressed=true] small{color:rgba(255,255,255,.85)}
+.stepnum{display:inline-block; width:20px; height:20px; border-radius:50%; background:var(--accent); color:#fff;
+  font-size:11px; font-weight:800; text-align:center; line-height:20px; margin-right:7px; vertical-align:1px}
+.lrow{display:flex; align-items:baseline; gap:8px; padding:8px 0; border-bottom:1px solid var(--line); font-size:13.5px}
+.lrow:last-of-type{border-bottom:0}
+.lrow .nmm{flex:1; font-weight:600; line-height:1.3}
+.lrow .nmm em{display:block; font-style:normal; font-size:11px; color:var(--ink2); font-weight:600}
+.lrow .pp{font-family:'IBM Plex Mono',monospace; font-variant-numeric:tabular-nums; font-weight:700;
+  background:none; border:0; border-bottom:1px dashed var(--ink2); color:var(--ink); cursor:pointer; padding:0 1px; font-size:13.5px}
+.lrow input.pe{width:74px; padding:5px 7px; font-size:13px; text-align:right}
+.totrow{display:flex; align-items:baseline; margin-top:14px; padding-top:12px; border-top:2px solid var(--ink); font-weight:800}
+.totrow span{flex:1; font-size:14px}
+.totrow b{font-size:24px; letter-spacing:-.03em}
+.verdict{margin-top:10px; padding:11px 13px; border-radius:11px; font-size:13px; font-weight:600; line-height:1.45}
+.vok{background:rgba(122,143,58,.14); color:var(--accent2)}
+.vover{background:rgba(180,84,27,.14); color:var(--accent)}
+.rc{padding:0; overflow:hidden}
+.rchead{display:flex; align-items:stretch}
+.rctap{flex:1; min-width:0; background:none; border:0; text-align:left; padding:14px 4px 14px 16px; color:var(--ink); font-family:inherit; cursor:pointer}
+.rctap b{display:block; font-size:15px; font-weight:800; letter-spacing:-.01em; line-height:1.25}
+.rm{display:flex; gap:6px; align-items:center; flex-wrap:wrap; margin-top:6px; font-size:11.5px; color:var(--ink2); font-weight:600}
+.heart{flex:none; background:none; border:0; width:54px; font-size:23px; line-height:1; color:var(--ink2); cursor:pointer; font-family:inherit}
+.heart[aria-pressed=true]{color:var(--accent)}
+.rtag{font-size:9.5px; font-weight:800; letter-spacing:.07em; text-transform:uppercase; padding:2px 7px; border-radius:99px; border:1px solid var(--line); background:var(--panel2); color:var(--ink2)}
+.rtag.new{color:var(--accent2); border-color:var(--accent2); background:transparent}
+.rtag.fade{color:var(--warn); border-color:var(--warn); background:transparent}
+.rtag.hot{color:var(--accent); border-color:var(--accent); background:transparent}
+.rdet{padding:2px 16px 16px; border-top:1px solid var(--line)}
+.rdet .sv{font-size:12px; color:var(--ink2); font-weight:600; margin:12px 0 0}
+.ihead{display:flex; align-items:baseline; gap:8px; margin:16px 0 2px}
+.ihead h3{margin:0 !important; flex:1}
+.ingl{list-style:none; margin:4px 0 0; padding:0}
+.ingl li{margin:0}
+.ingb{display:flex; gap:11px; align-items:flex-start; width:100%; background:none; border:0; border-bottom:1px solid var(--line);
+  padding:10px 0; text-align:left; font-family:inherit; font-size:14px; color:var(--ink); cursor:pointer; font-weight:600; line-height:1.35}
+.ingl li:last-child .ingb{border-bottom:0}
+.ingb .ck{flex:none; width:22px; height:22px; border-radius:50%; border:2px solid var(--line); display:flex; align-items:center;
+  justify-content:center; font-size:12px; font-weight:800; color:#fff; margin-top:-1px; transition:background .15s,border-color .15s}
+.ingb[aria-pressed=true] .ck{background:var(--accent2); border-color:var(--accent2)}
+.ingb[aria-pressed=true] .tx{text-decoration:line-through; color:var(--ink2)}
+.btnrow{display:flex; gap:8px; margin-top:14px}
+.btnrow .primary{flex:1.3}
+button.ghost{flex:1; background:var(--panel2); border:1px solid var(--line); color:var(--ink); border-radius:12px; padding:12px 8px;
+  font-size:14px; font-weight:800; font-family:inherit; cursor:pointer}
+button.link{background:none; border:0; color:var(--ink2); font-family:inherit; font-size:12.5px; font-weight:700;
+  text-decoration:underline; text-underline-offset:2px; cursor:pointer; padding:4px 0}
+.sechead{font-size:12px; font-weight:800; letter-spacing:.1em; text-transform:uppercase; color:var(--ink2); margin:20px 2px 9px}
+.sechead:first-child{margin-top:4px}
+.allset{margin-top:10px; font-size:12.5px; font-weight:700; color:var(--accent2)}
+.nextup{display:flex; align-items:baseline; gap:10px; flex-wrap:wrap}
+.nextup .big{font-size:30px; font-weight:800; letter-spacing:-.03em; line-height:1.1}
+.restcard{border-color:var(--warn)}
+.lift .ln small{display:block; font-size:11px; color:var(--accent); font-weight:700; margin-top:2px; line-height:1.3}
+.lift .last .up{color:var(--accent2); font-weight:800}
+.daysel button .nx{display:block; font-size:9.5px; letter-spacing:.06em; opacity:.85; margin-top:1px}
+.vswitch{display:inline-flex; margin-top:6px; background:var(--panel2); border:1px solid var(--line); border-radius:9px; padding:2px}
+.vswitch button{background:none; border:0; border-radius:7px; padding:5px 10px; font-family:inherit; font-size:12px; font-weight:800; color:var(--ink2); cursor:pointer}
+.vswitch button[aria-pressed=true]{background:var(--accent); color:#fff}
+.mrow{padding:8px 0; border-bottom:1px solid var(--line)}
+.mrow:last-of-type{border-bottom:0}
+.mtop{display:flex; align-items:baseline; gap:8px; font-size:12.5px; color:var(--ink2); font-weight:600}
+.mtop b{color:var(--ink); font-size:14px; font-weight:800; min-width:78px}
+.mtop .mset{margin-left:auto; color:var(--ink); font-weight:700}
+.mbar{position:relative; height:7px; background:var(--panel2); border:1px solid var(--line); border-radius:99px; margin-top:6px; overflow:hidden}
+.mbar i{display:block; height:100%; border-radius:99px; transition:width .4s ease}
+.mbar u{position:absolute; top:-1px; bottom:-1px; width:2px; background:var(--ink2); opacity:.55}
+.ghead{display:flex; align-items:baseline; gap:8px; margin:20px 0 2px; padding-bottom:6px; border-bottom:2px solid var(--ink)}
+.ghead b{font-size:16px; font-weight:800; letter-spacing:-.01em; flex:1}
+.ghead span{font-size:11.5px; color:var(--ink2); font-weight:600}
+.addex{display:flex; gap:6px; margin:10px 0 4px}
+.addex input[type=text]{flex:1; font-family:inherit; font-size:14px; padding:9px 10px}
+.addex input[type=number]{width:62px; font-size:14px; padding:9px 6px; text-align:center}
+.addex .ghost{flex:none; padding:9px 14px}
+svg.spark{width:72px; height:24px; flex:none; align-self:center}
+.gain{width:58px; text-align:right; font-weight:800; color:var(--accent2); align-self:center; font-size:13px}
+.matchline{font-size:12.5px; color:var(--ink2); font-weight:600; margin:14px 2px 6px; line-height:1.4}
+.matchline b{color:var(--warn); font-weight:800}
+.matchline b.ok{color:var(--accent2)}
+.basics{display:flex; align-items:center; gap:8px; margin-top:14px; font-size:13px; color:var(--ink2); font-weight:600; cursor:pointer}
+.basics input{width:18px; height:18px; accent-color:var(--accent); flex:none}
+#foodSeg button{font-size:11.5px; padding:9px 2px}
+.chartwrap{overflow-x:auto; -webkit-overflow-scrolling:touch}
+svg.chart{display:block; width:100%; height:190px; min-width:280px}
+nav{position:fixed; bottom:0; left:0; right:0; background:var(--panel); border-top:1px solid var(--line);
+  display:flex; padding-bottom:env(safe-area-inset-bottom,0px); z-index:20}
+nav button{flex:1; background:none; border:0; color:var(--ink2); padding:11px 2px 13px; font-family:inherit;
+  font-size:10.5px; font-weight:800; letter-spacing:.04em; text-transform:uppercase; cursor:pointer}
+nav button b{display:block; font-size:17px; font-weight:500; margin-bottom:2px}
+nav button[aria-selected=true]{color:var(--accent)}
+[hidden]{display:none !important}
+.sync{font-size:11px; color:var(--ink2); text-align:center; padding:4px 0 14px}
+</style>
+<style id="demo-bar-css">
+#demo-bar{position:relative;z-index:50;display:flex;flex-wrap:wrap;align-items:center;gap:6px 14px;
+ padding:calc(8px + env(safe-area-inset-top,0px)) 14px 8px;background:#1d3557;color:#f1f4f8;
+ font:500 13px/1.35 system-ui,-apple-system,"Segoe UI",sans-serif}
+#demo-bar span{flex:1 1 auto}
+#demo-bar a,#demo-bar button{color:#f1f4f8;background:transparent;border:1px solid rgba(241,244,248,.45);
+ border-radius:6px;padding:5px 10px;font:inherit;cursor:pointer;text-decoration:none}
+#demo-bar a:hover,#demo-bar button:hover{background:rgba(241,244,248,.12)}
+#demo-bar :focus-visible{outline:2px solid #f2c14e;outline-offset:2px}
+</style>
+</head>
+<body>
+<div id="demo-bar" role="note"><span>Demo with sample logs. Changes stay in your browser.</span>
+<button type="button" onclick="try{Object.keys(localStorage).filter(function(k){return k.indexOf('winterblock.demo')===0}).forEach(function(k){localStorage.removeItem(k)})}catch(e){};location.reload()">Reset demo</button>
+<a href="../../" target="_top" class="demo-home">Back to portfolio</a></div>
+<script>try{if(window.top!==window.self){var h=document.querySelector('#demo-bar .demo-home');if(h)h.remove();}}catch(e){}</script>
+
+<header>
+  <div>
+    <h1>Winter Block</h1>
+    <p id="subhead">13 weeks · 150 lb start · bench 215</p>
+  </div>
+  <button id="themeBtn" aria-label="Toggle theme">&#9689;</button>
+</header>
+
+<main class="wrap">
+
+<section id="v-today">
+  <div class="card">
+    <h2>Trend weight</h2>
+    <div class="hero">
+      <span class="big num" id="hTrend">&mdash;</span><span class="unit">lb</span>
+      <span class="delta num" id="hDelta">&mdash;</span>
+    </div>
+    <div class="bar"><i id="hBar" style="width:0%"></i></div>
+    <div class="barlabels"><span class="num">150</span><span class="num" id="hPct">0%</span><span class="num" id="hGoal">157 by winter</span></div>
+    <div class="grid" style="margin-top:14px">
+      <div class="stat"><b class="num" id="sRate">&mdash;</b><span>lb / week</span></div>
+      <div class="stat"><b class="num" id="sLeft">13</b><span>weeks to winter</span></div>
+    </div>
+    <p class="note" id="rateNote">Log 8+ weigh-ins before the trend means anything.</p>
+  </div>
+
+  <div class="card">
+    <h2>Log today <span class="num" id="todayDate" style="float:right;font-weight:600;letter-spacing:0;text-transform:none"></span></h2>
+    <div class="row">
+      <div><label class="fld" for="iW">Weight (lb)</label><input id="iW" type="number" step="0.1" inputmode="decimal" placeholder="150.0"></div>
+      <div><label class="fld" for="iC">Calories</label><input id="iC" type="number" inputmode="numeric" placeholder="2900"></div>
+    </div>
+    <div class="row">
+      <div><label class="fld" for="iP">Protein (g)</label><input id="iP" type="number" inputmode="numeric" placeholder="160"></div>
+      <div><label class="fld" for="iS">Sleep (hrs)</label><input id="iS" type="number" step="0.5" inputmode="decimal" placeholder="8"></div>
+    </div>
+    <button class="primary" id="btnSave">Save today</button>
+    <div class="saved" id="savedMsg"></div>
+  </div>
+
+  <div class="card">
+    <h2>Pace</h2>
+    <div class="seg" id="paceSel"></div>
+    <p class="note" id="paceNote"></p>
+    <h3 style="margin-top:18px">Calorie target</h3>
+    <div class="calrow">
+      <span class="v num" id="calV">2,900</span>
+      <button id="calDown" aria-label="Lower target by 100">&minus;</button>
+      <button id="calUp" aria-label="Raise target by 100">+</button>
+    </div>
+    <div class="macrobar" style="margin-top:12px">
+      <div style="flex:640;background:var(--accent)">P 160g</div>
+      <div style="flex:765;background:var(--warn)">F 85g</div>
+      <div id="carbSeg" style="flex:1480;background:var(--accent2)">C 370g</div>
+    </div>
+    <p class="note">Protein and fat stay fixed; carbs absorb every adjustment. Move this number only when the <b style="color:var(--ink)">4-week</b> trend tells you to &mdash; not after a bad weekend.</p>
+  </div>
+</section>
+
+<section id="v-progress" hidden>
+  <div class="card">
+    <h2>Weight over time</h2>
+    <div class="chartwrap"><svg class="chart" id="chart" viewBox="0 0 340 190" preserveAspectRatio="none" role="img" aria-label="Body weight trend"></svg></div>
+    <p class="note"><span style="color:var(--accent)">&#9679;</span> 7-day average &nbsp; <span style="color:var(--ink2)">&#9679;</span> daily &nbsp; <span style="color:var(--accent2)">&#9644;</span> target pace</p>
+  </div>
+  <div class="card">
+    <h2>Numbers</h2>
+    <div class="grid">
+      <div class="stat"><b class="num" id="pDays">0</b><span>days logged</span></div>
+      <div class="stat"><b class="num" id="pGain">&mdash;</b><span>lb gained</span></div>
+      <div class="stat"><b class="num" id="pCal">&mdash;</b><span>avg calories</span></div>
+      <div class="stat"><b class="num" id="pPro">&mdash;</b><span>avg protein</span></div>
+    </div>
+    <p class="note" id="pAdvice">Weigh in every morning, same conditions &mdash; after the bathroom, before food, no clothes. Daily numbers swing 2&ndash;3 lb on water and gut content alone; only the 7-day average carries information.</p>
+  </div>
+  <div class="card">
+    <h2>Adjusting</h2>
+    <table>
+      <tr><td><b>4-week avg flat or down</b></td><td class="r">+200 cal/day</td></tr>
+      <tr><td><b>Faster than target pace</b></td><td class="r">&minus;200 cal/day</td></tr>
+      <tr><td><b>On pace</b></td><td class="r">hold</td></tr>
+    </table>
+    <p class="note">At 1.43&times; bodyweight on bench you're past the stage where the scale alone tells the story. If weight climbs for a month while your top sets don't move, you're gaining the wrong tissue &mdash; pull 200 calories before you pull anything else.</p>
+  </div>
+  <div class="card">
+    <h2>Winter lift targets</h2>
+    <table>
+      <tr><td>Bench max</td><td class="r num">215 &rarr; 230</td></tr>
+      <tr><td>Bench working sets</td><td class="r num">175 &rarr; 185 same reps</td></tr>
+      <tr><td>Hack squat &amp; RDL</td><td class="r">fast jumps first 4&ndash;6 wks</td></tr>
+      <tr><td>Pull-ups</td><td class="r num">+2&ndash;3 reps per set</td></tr>
+    </table>
+    <p class="note">Hack squat and RDL are new to your routine, so expect quick early gains while you learn them &mdash; don't mistake that for the pace you'll keep. Bench moves slowest; 2.5 lb jumps beat stalling on 5s.</p>
+  </div>
+  <div class="card">
+    <h2>Your data</h2>
+    <div id="backupBody"></div>
+  </div>
+</section>
+
+<section id="v-food" hidden>
+  <div class="seg" id="foodSeg" style="margin-bottom:12px"></div>
+  <div id="foodRecipes"></div>
+  <div id="foodLookup" hidden></div>
+  <div id="foodSaved" hidden></div>
+  <div id="foodGuide" hidden>
+    <div class="card">
+      <h2>The engine</h2>
+      <p class="note" style="margin:0">Four feedings, each built as protein (35&ndash;60g) + a real starch + a fat-carrying sauce or finish. The sauce is where the surplus hides &mdash; browned butter, tahini, aioli, chilli oil, a proper pan reduction. Calories you want to eat beat calories you have to force down.</p>
+    </div>
+    <div class="card">
+      <h2>Lunch &amp; around training</h2>
+      <p class="note" style="margin:0 0 6px">Lunch is almost always last night's dinner plus extra rice &mdash; that's the point of cooking six portions of rag&ugrave;. Around training, keep it fast:</p>
+      <ul>
+        <li>Two slices sourdough + 40g peanut butter + honey, pre-lift</li>
+        <li>Whey in water straight after, real food within 90 minutes</li>
+        <li>Greek yogurt, granola, jam if the day is running short</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h2>Fixing a short day</h2>
+      <table>
+        <tr><td>Whole milk over water in oats</td><td class="r num">+125</td></tr>
+        <tr><td>Extra tbsp of good olive oil</td><td class="r num">+120</td></tr>
+        <tr><td>Knob of butter into anything</td><td class="r num">+100</td></tr>
+        <tr><td>30g toasted walnuts or almonds</td><td class="r num">+180</td></tr>
+        <tr><td>40g dates or dried apricots</td><td class="r num">+110</td></tr>
+        <tr><td>Aioli or tahini sauce, 2 tbsp</td><td class="r num">+180</td></tr>
+      </table>
+      <p class="note">Bad appetite day: milk, oats, peanut butter, banana, whey, blend. ~700 kcal in ninety seconds. Low fibre and low volume win when you're struggling &mdash; white rice over brown, juice over whole fruit.</p>
+    </div>
+    <div class="card">
+      <h2>The one habit</h2>
+      <p class="note" style="margin:0">Cook Sunday like a restaurant does prep: a pot of rice, a batch of rag&ugrave; or braise, a tray of roast veg, a jar of one good sauce, proteins portioned and seasoned raw. Weeknights become fifteen minutes of actual cooking &mdash; the only version of this you'll still be doing in week eleven.</p>
+    </div>
+  </div>
+</section>
+
+<section id="v-train" hidden>
+  <div class="seg" id="trainSeg" style="margin-bottom:12px"></div>
+  <div id="trainLog"></div>
+  <div id="trainStats" hidden></div>
+  <div class="card" id="trainGuide">
+    <h2>How to progress</h2>
+    <h3>Pick muscles, not days</h3>
+    <p class="note">Any combination works &mdash; chest + back, back + arms, whatever you feel like. What drives growth is each muscle getting <b style="color:var(--ink)">roughly twice a week</b>, with a day or two between hits. The Muscles card tracks both: aim to get every bar past its tick, and avoid anything marked Recovering unless you're only doing light isolation work.</p>
+    <h3>Double progression</h3>
+    <p class="note">Climb the rep range, then add weight. Bench example: 175 &times; 8, 8, 9 &rarr; 9, 9, 10 &rarr; when all three sets hit 10, go to 180 and start back at the bottom. <b style="color:var(--ink)">2.5&ndash;5 lb jumps upper, 5&ndash;10 lb lower.</b> The &uarr; means you beat last time.</p>
+    <h3>Reps in reserve</h3>
+    <p class="note">Compounds: stop 1&ndash;2 reps short, last set can go to failure. Isolations: 0&ndash;1 in reserve is fine &mdash; they cost little recovery.</p>
+    <h3>Rest</h3>
+    <p class="note">At least one full rest day every 6 sessions &mdash; the app flags when you're due. Take one early if lifts go backwards two sessions in a row; that's fatigue, not weakness.</p>
+    <h3>Running</h3>
+    <p class="note">Your 2 miles a week costs about 200 calories &mdash; nothing. Put it on a rest day or after an upper session, never the day before legs.</p>
+    <h3>Deload</h3>
+    <p class="note">Every 6&ndash;8 weeks: one week at ~60% of your working weights, same reps, calories unchanged.</p>
+  </div>
+</section>
+
+<section id="v-shop" hidden>
+  <div id="quizWrap"></div>
+  <div id="listWrap"></div>
+  <div class="card">
+    <h2>About these prices</h2>
+    <p class="note" style="margin:0">Baselines are Walmart figures from September 2026 &mdash; Great Value where it exists, value packs on meat. <b style="color:var(--ink)">Tap any price to correct it.</b> Walmart prices are set regionally and move weekly, so two stores in the same state can differ 5&ndash;10% on identical items. After one real shop with your receipt, these numbers will beat anything scraped from a website.</p>
+  </div>
+</section>
+
+<div class="sync" id="syncMsg"></div>
+</main>
+
+<nav role="tablist">
+  <button role="tab" data-v="today" aria-selected="true"><b>&#9673;</b>Today</button>
+  <button role="tab" data-v="progress" aria-selected="false"><b>&#9698;</b>Progress</button>
+  <button role="tab" data-v="food" aria-selected="false"><b>&#9741;</b>Food</button>
+  <button role="tab" data-v="train" aria-selected="false"><b>&#9646;</b>Train</button>
+  <button role="tab" data-v="shop" aria-selected="false"><b>&#9635;</b>Shop</button>
+</nav>
+
+<script>
+(function(){
+"use strict";
+
+var START = 150, LS = "winterblock.demo.v1";
+var WINTER = new Date(2026, 11, 21);
+
+var PACES = [
+  {k:"lean",  r:0.40, label:"Lean",  sub:"0.4 /wk", cal:2800,
+   note:"Slowest visible progress, cleanest result. About 5 lb on by winter and essentially none of it fat. Choose this if you never want a cut."},
+  {k:"std",   r:0.50, label:"Standard", sub:"0.5 /wk", cal:2900,
+   note:"The recommendation. ~157 by winter, 4\u20135 lb of it lean. Keep running it into spring and 165 lands around April."},
+  {k:"push",  r:0.75, label:"Push",  sub:"0.75 /wk", cal:3100,
+   note:"~160 by winter, but 4\u20135 lb of that is fat you'll carry into January. Only worth it if you're willing to run a short cut after."}
+];
+
+
+var state = { logs:{}, lifts:{}, pace:"std", cal:2900, startDate:null,
+               prefs:{proteins:[], starches:[], dinners:5}, budget:120, prices:{}, showQuiz:false,
+               saved:{}, checks:{}, aiRecipes:{}, archived:{}, hidden:[], recs:{}, expired:{}, sessions:[], pick:{}, hist:{}, custom:[], draft:null, trainView:"log", pantry:[], pantryBasics:true, foodView:"recipes", openRecipe:null, justRotated:0 };
+var remote = null, saveTimer = null, lastSync = 0, downloadsFn = null;
+
+function $(id){ return document.getElementById(id); }
+function keyOf(d){ return d.getFullYear()+"-"+String(d.getMonth()+1).padStart(2,"0")+"-"+String(d.getDate()).padStart(2,"0"); }
+function todayKey(){ return keyOf(new Date()); }
+function pace(){ for(var i=0;i<PACES.length;i++) if(PACES[i].k === state.pace) return PACES[i]; return PACES[1]; }
+function weeksLeft(){ return Math.max(0, (WINTER - new Date()) / (7*86400000)); }
+function goalWeight(){ var tot = (WINTER - new Date(state.startDate || todayKey())) / (7*86400000); return START + Math.max(0, tot) * pace().r; }
+
+function seedDemo(){
+  try{ if(localStorage.getItem(LS)) return; }catch(e){ return; }
+  var now=new Date(), logs={}, hist={}, lifts={}, sessions=[];
+  function back(n){ var d=new Date(now); d.setDate(d.getDate()-n); return keyOf(d); }
+  for(var i=34;i>=1;i--){
+    var base=150+(34-i)*0.072, wob=Math.sin(i*1.7)*0.9;
+    logs[back(i)]={ w:Math.round((base+wob)*10)/10, cal:2800+Math.round(Math.cos(i)*180), p:150+Math.round(Math.sin(i*2)*15), s:Math.round((7+Math.sin(i)*0.8)*10)/10 };
+  }
+  var plan=[["bench",195,8,2.5],["pullup",0,9,0],["squat",230,8,10],["rdl",185,8,5],["ohp",95,8,2.5],["latpd",140,10,5]];
+  var groups={bench:"chest",pullup:"back",squat:"legs",rdl:"legs",ohp:"shoulders",latpd:"back"};
+  [31,27,24,20,17,13,10,6,3].forEach(function(dago,ix){
+    var keys=[], g={};
+    plan.forEach(function(p,j){ if((ix+j)%2) return;
+      var k=p[0], wt=p[1]+Math.floor(ix/2)*p[3], r=p[2]+(k==="pullup"?Math.floor(ix/3):0);
+      (hist[k]=hist[k]||[]).push([back(dago),wt,r]); keys.push(k); g[groups[k]]=1; });
+    sessions.push({d:back(dago),g:Object.keys(g),x:keys});
+  });
+  Object.keys(hist).forEach(function(k){ var h=hist[k], l=h[h.length-1], p=h.length>1?h[h.length-2]:null;
+    lifts[k]={w:l[1],r:l[2],d:l[0],pw:p?p[1]:null,pr:p?p[2]:null}; });
+  try{ localStorage.setItem(LS, JSON.stringify({logs:logs,lifts:lifts,hist:hist,sessions:sessions,pace:"std",cal:2900,startDate:back(35)})); }catch(e){}
+}
+seedDemo();
+function loadLocal(){
+  try{
+    var raw = localStorage.getItem(LS);
+    if(raw){
+      var o = JSON.parse(raw);
+      if(o && typeof o === "object"){
+        state.logs = o.logs || {}; state.lifts = o.lifts || {};
+        if(o.pace) state.pace = o.pace;
+        if(typeof o.cal === "number") state.cal = o.cal;
+        state.startDate = o.startDate || null;
+        if(o.prefs) state.prefs = o.prefs;
+        if(typeof o.budget === "number") state.budget = o.budget;
+        if(o.prices) state.prices = o.prices;
+        if(o.saved) state.saved = o.saved;
+        if(o.checks) state.checks = o.checks;
+        if(o.aiRecipes) state.aiRecipes = o.aiRecipes;
+        if(o.archived) state.archived = o.archived;
+        if(Array.isArray(o.hidden)) state.hidden = o.hidden;
+        if(o.recs) state.recs = o.recs;
+        if(Array.isArray(o.sessions)) state.sessions = o.sessions;
+        if(o.pick) state.pick = o.pick;
+        if(o.hist) state.hist = o.hist;
+        if(Array.isArray(o.pantry)) state.pantry = o.pantry;
+        if(o.pantryBasics === false) state.pantryBasics = false;
+        if(Array.isArray(o.custom)) state.custom = o.custom;
+        if(o.draft) state.draft = o.draft;
+        if(o.expired) state.expired = o.expired;
+        if(o.justRotated) state.justRotated = o.justRotated;
+      }
+    }
+  }catch(e){}
+  if(!state.startDate) state.startDate = todayKey();
+}
+function saveLocal(){ try{ localStorage.setItem(LS, JSON.stringify(state)); }catch(e){} }
+
+function persist(){
+  saveLocal();
+  if(!remote) return;
+  clearTimeout(saveTimer);
+  saveTimer = setTimeout(function(){
+    remote.set({ logs:state.logs, lifts:state.lifts, pace:state.pace, cal:state.cal,
+                 startDate:state.startDate, prefs:state.prefs, budget:state.budget,
+                 prices:state.prices, saved:state.saved, checks:state.checks,
+                 aiRecipes:state.aiRecipes, archived:state.archived, hidden:state.hidden,
+                 recs:state.recs, expired:state.expired, sessions:state.sessions, pick:state.pick, hist:state.hist, custom:state.custom, pantry:state.pantry, pantryBasics:state.pantryBasics, draft:state.draft, justRotated:state.justRotated||0, updatedAt:Date.now() })
+      .then(function(){ lastSync = Date.now(); $("syncMsg").textContent = "Synced to your account"; renderBackup(); })
+      .catch(function(err){
+        $("syncMsg").textContent = (err && err.code === "revoked")
+          ? "Saved on this device only" : "Saved locally \u2014 will retry";
+      });
+  }, 700);
+}
+
+function connect(){
+  if(typeof window.claude === "undefined" || !window.claude || typeof window.claude.use !== "function") return;
+  window.claude.use("downloads").then(function(dl){ if(dl){ downloadsFn = dl; renderBackup(); } }).catch(function(){});
+  window.claude.use("sample").then(function(s){ if(s){ sampleFn = s; renderFood(); } }).catch(function(){});
+  Promise.all([window.claude.use("db"), window.claude.use("user")]).then(function(r){
+    var db = r[0], user = r[1];
+    if(!db || !user) return;
+    return user.id().then(function(uid){
+      if(!uid) return;
+      remote = db.doc("data/users/" + uid + "/bulkplan");
+      return remote.get().then(function(snap){
+        if(snap.exists){
+          // synced data arrives frozen (read-only); work on an editable copy
+          var d = JSON.parse(JSON.stringify(snap.data() || {})), k;
+          var rl = d.logs || {}, rf = d.lifts || {};
+          for(k in rl){ if(Object.prototype.hasOwnProperty.call(rl,k)) state.logs[k] = rl[k]; }
+          for(k in rf){ if(Object.prototype.hasOwnProperty.call(rf,k)) state.lifts[k] = rf[k]; }
+          if(d.pace) state.pace = d.pace;
+          if(typeof d.cal === "number") state.cal = d.cal;
+          if(d.startDate) state.startDate = d.startDate;
+          if(d.prefs) state.prefs = d.prefs;
+          if(typeof d.budget === "number") state.budget = d.budget;
+          if(d.prices) state.prices = d.prices;
+          if(d.saved) state.saved = d.saved;
+          if(d.checks) state.checks = d.checks;
+          if(d.aiRecipes) state.aiRecipes = d.aiRecipes;
+          if(d.archived) state.archived = d.archived;
+          if(Array.isArray(d.hidden)) state.hidden = d.hidden;
+          if(d.recs) state.recs = d.recs;
+          if(Array.isArray(d.sessions)) state.sessions = d.sessions;
+          if(d.pick) state.pick = d.pick;
+          if(d.hist) state.hist = d.hist;
+          if(Array.isArray(d.pantry)) state.pantry = d.pantry;
+          if(d.pantryBasics === false) state.pantryBasics = false;
+          if(Array.isArray(d.custom)) state.custom = d.custom;
+          if(d.draft && (!state.draft || state.draft.d !== todayKey() || !Object.keys(state.draft.vals || {}).length)) state.draft = d.draft;
+          migrateTrain();
+          if(d.expired) state.expired = d.expired;
+          if(d.justRotated) state.justRotated = d.justRotated;
+          refreshRecs(); saveLocal(); setTimeout(persist, 0);
+          saveLocal(); lastSync = Date.now(); renderAll();
+          $("syncMsg").textContent = "Synced to your account";
+        } else { persist(); }
+      });
+    });
+  }).catch(function(){});
+}
+
+function sortedLogs(){
+  return Object.keys(state.logs).sort().map(function(k){
+    var v = state.logs[k]; return { d:k, w:v.w, cal:v.cal, p:v.p, s:v.s };
+  });
+}
+function weighIns(){ return sortedLogs().filter(function(x){ return typeof x.w === "number" && x.w > 0; }); }
+function trailingAvg(a, n){
+  if(!a.length) return null;
+  var s = a.slice(-n), sum = 0;
+  for(var i=0;i<s.length;i++) sum += s[i].w;
+  return sum / s.length;
+}
+function ratePerWeek(){
+  var w = weighIns();
+  if(w.length < 8) return null;
+  var half = Math.min(14, Math.floor(w.length/2));
+  var recent = w.slice(-half), older = w.slice(-half*2, -half);
+  if(!older.length) return null;
+  function avg(a){ var s=0; for(var i=0;i<a.length;i++) s+=a[i].w; return s/a.length; }
+  function mid(a){ return new Date(a[Math.floor(a.length/2)].d).getTime(); }
+  var days = (mid(recent) - mid(older)) / 86400000;
+  if(days <= 0) return null;
+  return (avg(recent) - avg(older)) / days * 7;
+}
+
+function renderPace(){
+  var sel = $("paceSel");
+  sel.innerHTML = "";
+  PACES.forEach(function(p){
+    var b = document.createElement("button");
+    b.innerHTML = "";
+    b.appendChild(document.createTextNode(p.label));
+    var s = document.createElement("small"); s.textContent = p.sub; b.appendChild(s);
+    b.setAttribute("aria-selected", p.k === state.pace ? "true" : "false");
+    b.addEventListener("click", function(){
+      state.pace = p.k; state.cal = p.cal;
+      persist(); renderPace(); renderToday(); renderProgress();
+    });
+    sel.appendChild(b);
+  });
+  $("paceNote").textContent = pace().note;
+  $("calV").textContent = state.cal.toLocaleString();
+  var carbs = Math.max(0, Math.round((state.cal - 160*4 - 85*9) / 4));
+  var seg = $("carbSeg");
+  seg.textContent = "C " + carbs + "g";
+  seg.style.flex = String(carbs * 4);
+}
+
+function renderToday(){
+  var w = weighIns(), trend = trailingAvg(w, 7);
+  var shown = trend === null ? START : trend;
+  var goal = goalWeight();
+
+  $("hTrend").textContent = trend === null ? "\u2014" : trend.toFixed(1);
+  var gained = shown - START;
+  $("hDelta").textContent = (gained >= 0 ? "+" : "") + gained.toFixed(1) + " lb";
+  $("hGoal").textContent = goal.toFixed(0) + " by winter";
+
+  var pct = Math.max(0, Math.min(100, (shown - START) / Math.max(0.1, goal - START) * 100));
+  $("hBar").style.width = pct + "%";
+  $("hPct").textContent = Math.round(pct) + "%";
+  $("sLeft").textContent = Math.max(0, Math.round(weeksLeft()));
+
+  var rate = ratePerWeek(), tgt = pace().r;
+  if(rate === null){
+    $("sRate").textContent = "\u2014";
+    $("rateNote").textContent = w.length
+      ? "Two weeks of weigh-ins before this means anything. " + w.length + " logged."
+      : "Log 8+ weigh-ins before the trend means anything.";
+  } else {
+    $("sRate").textContent = (rate >= 0 ? "+" : "") + rate.toFixed(2);
+    if(rate <= 0.05){
+      $("rateNote").textContent = "Not gaining. Add 200 cal/day and hold it for three weeks before judging again.";
+    } else if(rate > tgt * 1.4){
+      $("rateNote").textContent = "Faster than your " + tgt.toFixed(2) + " lb/wk target \u2014 that surplus is tipping into fat. Drop 200 cal/day.";
+    } else if(rate < tgt * 0.6){
+      $("rateNote").textContent = "Under target pace. If the 4-week trend holds here, add 200 cal/day.";
+    } else {
+      $("rateNote").textContent = "On pace. Hold calories and keep putting weight on the bar.";
+    }
+  }
+
+  $("todayDate").textContent = todayKey();
+  var t = state.logs[todayKey()] || {};
+  if(document.activeElement !== $("iW")) $("iW").value = t.w != null ? t.w : "";
+  if(document.activeElement !== $("iC")) $("iC").value = t.cal != null ? t.cal : "";
+  if(document.activeElement !== $("iP")) $("iP").value = t.p != null ? t.p : "";
+  if(document.activeElement !== $("iS")) $("iS").value = t.s != null ? t.s : "";
+}
+
+function renderProgress(){
+  var all = sortedLogs(), w = weighIns();
+  $("pDays").textContent = all.length;
+  var trend = trailingAvg(w, 7);
+  $("pGain").textContent = trend === null ? "\u2014" : ((trend - START >= 0 ? "+" : "") + (trend - START).toFixed(1));
+
+  function meanOf(key){
+    var v = all.filter(function(x){ return typeof x[key] === "number" && x[key] > 0; });
+    if(!v.length) return null;
+    var s = 0; for(var i=0;i<v.length;i++) s += v[i][key];
+    return s / v.length;
+  }
+  var mc = meanOf("cal"), mp = meanOf("p");
+  $("pCal").textContent = mc === null ? "\u2014" : Math.round(mc);
+  $("pPro").textContent = mp === null ? "\u2014" : Math.round(mp) + "g";
+
+  if(mc !== null && all.length >= 7){
+    var gap = Math.round(mc - state.cal);
+    $("pAdvice").textContent = Math.abs(gap) < 100
+      ? "Within 100 cal of target on average \u2014 that's the hard part done. Consistency beats precision from here."
+      : (gap < 0
+        ? "Averaging " + Math.abs(gap) + " cal/day under target. That gap is almost certainly why the scale is slow."
+        : "Averaging " + gap + " cal/day over target. Fine if the pace is right, worth trimming if it isn't.");
+  }
+  drawChart(w);
+}
+
+function drawChart(w){
+  var svg = $("chart"), W = 340, H = 190, padL = 30, padR = 8, padT = 12, padB = 20;
+  svg.innerHTML = "";
+  var NS = "http://www.w3.org/2000/svg";
+  function el(n, a){ var e = document.createElementNS(NS, n); for(var k in a) e.setAttribute(k, a[k]); return e; }
+
+  if(w.length < 2){
+    var t = el("text", {x:W/2, y:H/2, "text-anchor":"middle", fill:"var(--ink2)", "font-size":"12"});
+    t.textContent = "Log a few weigh-ins to see the curve";
+    svg.appendChild(t); return;
+  }
+
+  var goal = goalWeight(), lo = START - 2, hi = Math.max(goal, START) + 1;
+  for(var i=0;i<w.length;i++){ if(w[i].w < lo) lo = w[i].w - 1; if(w[i].w > hi) hi = w[i].w + 1; }
+  var t0 = new Date(w[0].d).getTime(), tN = new Date(w[w.length-1].d).getTime();
+  var span = Math.max(tN - t0, 14*86400000);
+  function X(ms){ return padL + (ms - t0) / span * (W - padL - padR); }
+  function Y(v){ return padT + (hi - v) / (hi - lo) * (H - padT - padB); }
+
+  for(var g=0; g<=4; g++){
+    var val = lo + (hi - lo) * g / 4, y = Y(val);
+    svg.appendChild(el("line", {x1:padL, y1:y, x2:W-padR, y2:y, stroke:"var(--line)", "stroke-width":"1"}));
+    var lb = el("text", {x:padL-5, y:y+3.5, "text-anchor":"end", fill:"var(--ink2)", "font-size":"9", "font-family":"monospace"});
+    lb.textContent = val.toFixed(0);
+    svg.appendChild(lb);
+  }
+
+  var s0 = new Date(state.startDate).getTime();
+  var paceAt = function(ms){ return START + (ms - s0) / 86400000 / 7 * pace().r; };
+  svg.appendChild(el("line", {x1:X(t0), y1:Y(paceAt(t0)), x2:X(t0+span), y2:Y(paceAt(t0+span)),
+    stroke:"var(--accent2)", "stroke-width":"1.5", "stroke-dasharray":"4 4", opacity:"0.85"}));
+
+  for(var j=0;j<w.length;j++){
+    svg.appendChild(el("circle", {cx:X(new Date(w[j].d).getTime()), cy:Y(w[j].w), r:"1.8", fill:"var(--ink2)", opacity:"0.5"}));
+  }
+
+  var pts = [];
+  for(var k=0;k<w.length;k++){
+    var from = Math.max(0, k-6), s = 0, n = 0;
+    for(var m=from;m<=k;m++){ s += w[m].w; n++; }
+    pts.push([X(new Date(w[k].d).getTime()), Y(s/n)]);
+  }
+  svg.appendChild(el("path", {d:"M" + pts.map(function(p){ return p[0].toFixed(1)+","+p[1].toFixed(1); }).join("L"),
+    fill:"none", stroke:"var(--accent)", "stroke-width":"2.2", "stroke-linejoin":"round", "stroke-linecap":"round"}));
+}
+
+/* =================== TRAIN: pick muscles, pick exercises, track growth =================== */
+var GROUPS = [
+  {id:"chest",     n:"Chest",     min:10},
+  {id:"back",      n:"Back",      min:10},
+  {id:"shoulders", n:"Shoulders", min:8},
+  {id:"biceps",    n:"Biceps",    min:8},
+  {id:"triceps",   n:"Triceps",   min:8},
+  {id:"legs",      n:"Legs",      min:12}
+];
+/* core = his routine (shown by default); the rest live under "More options".
+   alt = exercises he swaps between; one switch, separate histories. */
+var LIB = [
+  {k:"dips",     n:"Dips",                    g:"chest", s:"2 \u00d7 8-12",  core:1},
+  {k:"bench",    n:"Bench press",             g:"chest", s:"3 \u00d7 6-10",  core:1, note:"Sets 1\u20132 stop 1\u20132 reps short. Only set 3 to failure."},
+  {k:"incmach",  n:"Incline machine press",   g:"chest", s:"3 \u00d7 8-12",  core:1},
+  {k:"incbb",    n:"Incline bench",           g:"chest", s:"3 \u00d7 8-10",  core:1},
+  {k:"fly",      n:"Machine fly",             g:"chest", s:"3 \u00d7 12-15", core:1},
+  {k:"dbbench",  n:"DB bench press",          g:"chest", s:"3 \u00d7 8-12"},
+  {k:"cablefly", n:"Cable crossover",         g:"chest", s:"3 \u00d7 12-15"},
+
+  {k:"pullup",   n:"Pull-ups",                g:"back", s:"2 \u00d7 max",   core:1, note:"Enter added weight, or 0 for bodyweight."},
+  {k:"latpd",    n:"Lat pulldown",            g:"back", s:"3 \u00d7 8-12",  core:1},
+  {k:"crow",     n:"Cable row",               g:"back", s:"3 \u00d7 8-12",  core:1, alt:"row", al:"Cable"},
+  {k:"srow",     n:"Seated row",              g:"back", s:"3 \u00d7 8-12",  core:1, alt:"row", al:"Seated"},
+  {k:"pullover", n:"Lat pullover",            g:"back", s:"3 \u00d7 12-15", core:1},
+  {k:"bbrow",    n:"Barbell row",             g:"back", s:"3 \u00d7 6-10"},
+  {k:"dbrow",    n:"Single-arm DB row",       g:"back", s:"3 \u00d7 8-12"},
+
+  {k:"ohp",      n:"Shoulder press",          g:"shoulders", s:"3 \u00d7 6-10",  core:1},
+  {k:"lat",      n:"Lateral raise",           g:"shoulders", s:"5 \u00d7 12-20", core:1},
+  {k:"rdelt",    n:"Rear delt fly",           g:"shoulders", s:"4 \u00d7 12-15", core:1},
+  {k:"facepull", n:"Face pull",               g:"shoulders", s:"3 \u00d7 12-15"},
+  {k:"frontr",   n:"Front raise",             g:"shoulders", s:"3 \u00d7 10-12", note:"Optional \u2014 pressing already works your front delts hard."},
+
+  {k:"preacher", n:"Preacher curl",           g:"biceps", s:"3 \u00d7 8-12",  core:1},
+  {k:"bimach",   n:"Single-arm bicep machine",g:"biceps", s:"4 \u00d7 10-12", core:1},
+  {k:"hammer",   n:"Hammer curl",             g:"biceps", s:"3 \u00d7 10-12", core:1},
+  {k:"skull",    n:"Skull crusher",           g:"triceps", s:"4 \u00d7 8-12",  core:1, alt:"triext", al:"Skull"},
+  {k:"ohext",    n:"Overhead triceps ext",    g:"triceps", s:"4 \u00d7 8-12",  core:1, alt:"triext", al:"Overhead"},
+  {k:"pushdown", n:"Triceps pushdown",        g:"triceps", s:"3 \u00d7 10-15", core:1},
+  {k:"bbcurl",   n:"Barbell curl",            g:"biceps", s:"3 \u00d7 8-12"},
+  {k:"icurl",    n:"Incline DB curl",         g:"biceps", s:"3 \u00d7 10-12"},
+  {k:"ccurl",    n:"Cable curl",              g:"biceps", s:"3 \u00d7 10-15"},
+  {k:"cgbench",  n:"Close-grip bench",        g:"triceps", s:"3 \u00d7 6-10"},
+  {k:"kickback", n:"Cable kickback",          g:"triceps", s:"3 \u00d7 12-15"},
+
+  {k:"squat",    n:"Hack squat",              g:"legs", s:"3 \u00d7 6-8",   core:1, alt:"squat", al:"Hack", note:"First, while you're fresh."},
+  {k:"bsquat",   n:"Back squat",              g:"legs", s:"3 \u00d7 6-8",   core:1, alt:"squat", al:"Back", note:"First, while you're fresh."},
+  {k:"rdl",      n:"Romanian deadlift",       g:"legs", s:"3 \u00d7 8",     core:1},
+  {k:"press",    n:"Leg press",               g:"legs", s:"3 \u00d7 10-12", core:1},
+  {k:"ext",      n:"Leg extension",           g:"legs", s:"3 \u00d7 12-15", core:1, note:"Single / single / double leg."},
+  {k:"curl",     n:"Hamstring curl",          g:"legs", s:"3 \u00d7 10-12", core:1},
+  {k:"calf",     n:"Calf raise",              g:"legs", s:"4 \u00d7 10-15", core:1},
+  {k:"abd",      n:"Hip abduction",           g:"legs", s:"2 \u00d7 15-20", core:1},
+  {k:"bss",      n:"Bulgarian split squat",   g:"legs", s:"3 \u00d7 8-10 /leg"},
+  {k:"dead",     n:"Deadlift",                g:"legs", s:"3 \u00d7 4-6"}
+];
+var LEGACY_DAYS = {
+  "Chest & Arms":["chest","biceps","triceps"], "Back & Shoulders":["back","shoulders"], "Legs":["legs"],
+  "Upper A":["chest","back","shoulders","biceps","triceps"], "Upper B":["chest","back","shoulders","biceps","triceps"],
+  "Lower A":["legs"], "Lower B":["legs"]
+};
+var moreOpen = {}, trainMsg = "", trainMsgTimer = null;
+
+function allEx(){
+  return LIB.concat((state.custom || []).map(function(c){ return {k:c.k, n:c.n, g:c.g, s:c.s, core:1, custom:1}; }));
+}
+function exByKey(k){ var a = allEx(); for(var i=0;i<a.length;i++) if(a[i].k === k) return a[i]; return null; }
+function groupName(id){ for(var i=0;i<GROUPS.length;i++) if(GROUPS[i].id === id) return GROUPS[i].n; return id; }
+function setsOf(ex){ var n = parseInt(ex.s, 10); return isNaN(n) ? 3 : n; }
+function union(a, b){ var o = (a || []).slice(); (b || []).forEach(function(x){ if(o.indexOf(x) === -1) o.push(x); }); return o; }
+
+function splitArms(list){
+  if(!list || list.indexOf("arms") === -1) return list;
+  return union(list.filter(function(g){ return g !== "arms"; }), ["biceps","triceps"]);
+}
+function migrateTrain(){
+  (state.custom || []).forEach(function(c){
+    if(c.g === "arms") c.g = /tri|push|skull|extension|kickback|dip|close/i.test(c.n) ? "triceps" : "biceps";
+  });
+  if(state.draft && state.draft.sel) state.draft.sel = splitArms(state.draft.sel);
+  state.sessions = (state.sessions || []).map(function(s){
+    if(s.g || s.x){ s.g = splitArms(s.g); return s; }
+    return { d: s.d, g: LEGACY_DAYS[s.day] || [], x: [] };
+  });
+  Object.keys(state.lifts).forEach(function(k){
+    var l = state.lifts[k];
+    if(!state.hist[k] && l && l.d) state.hist[k] = [[l.d, l.w, l.r]];
+  });
+}
+function lastSession(){ return state.sessions.length ? state.sessions[state.sessions.length - 1] : null; }
+function trainStreak(){
+  var dates = {}; state.sessions.forEach(function(s){ dates[s.d] = true; });
+  var ls = lastSession(); if(!ls || daysSince(ls.d) > 1) return 0;
+  var n = 0, d = new Date(ls.d + "T00:00:00");
+  while(dates[keyOf(d)]){ n++; d.setDate(d.getDate() - 1); }
+  return n;
+}
+/* What a session actually hit: the groups of the lifts logged in it. */
+function hitGroups(s){
+  if(s.x && s.x.length){
+    var g = {}; s.x.forEach(function(k){ var e = exByKey(k); if(e) g[e.g] = 1; });
+    return Object.keys(g);
+  }
+  return s.g || [];
+}
+function groupStatus(){
+  var out = {};
+  GROUPS.forEach(function(G){ out[G.id] = { last: null, sets: 0 }; });
+  state.sessions.forEach(function(s){
+    hitGroups(s).forEach(function(g){ if(out[g] && (!out[g].last || s.d > out[g].last)) out[g].last = s.d; });
+    if(daysSince(s.d) < 7){
+      if(s.x && s.x.length) s.x.forEach(function(k){ var e = exByKey(k); if(e && out[e.g]) out[e.g].sets += setsOf(e); });
+      else (s.g || []).forEach(function(g){ if(out[g]) out[g].sets += 9; });
+    }
+  });
+  return out;
+}
+function suggestGroups(st){
+  var ranked = GROUPS.map(function(G){
+    return { id: G.id, days: st[G.id].last ? daysSince(st[G.id].last) : 99, gap: G.min - st[G.id].sets };
+  }).sort(function(a, b){ return (b.days - a.days) || (b.gap - a.gap); });
+  if(ranked[0].id === "legs") return ["legs"];
+  var second = ranked.filter(function(r){ return r.id !== "legs" && r.id !== ranked[0].id; })[0];
+  return [ranked[0].id, second.id];
+}
+function ensureDraft(){
+  if(!state.draft || state.draft.d !== todayKey()){
+    var t = state.sessions.filter(function(s){ return s.d === todayKey(); })[0];
+    state.draft = { d: todayKey(), sel: t ? hitGroups(t) : suggestGroups(groupStatus()), vals: {} };
+  }
+  return state.draft;
+}
+function pickFor(alt, variants){
+  var k = state.pick[alt];
+  if(variants.some(function(v){ return v.k === k; })) return k;
+  var best = variants[0].k, when = "";
+  variants.forEach(function(v){ var l = state.lifts[v.k]; if(l && l.d > when){ when = l.d; best = v.k; } });
+  return best;
+}
+function flash(msg){
+  trainMsg = msg; clearTimeout(trainMsgTimer);
+  trainMsgTimer = setTimeout(function(){ trainMsg = ""; var el = $("trainMsg"); if(el) el.textContent = ""; }, 3500);
+}
+
+function liftRow(ex, variants){
+  var dr = ensureDraft();
+  var row = mk("div", "lift");
+  var nm = mk("div", "ln");
+  nm.appendChild(document.createTextNode(variants ? ex.n.replace(/^(Cable|Seated) /, "").replace(/^(Hack|Back) /, "") : ex.n));
+  if(variants && ex.alt === "triext") nm.firstChild.textContent = "Triceps extension";
+  nm.appendChild(mk("em", null, ex.s));
+  if(ex.note) nm.appendChild(mk("small", null, ex.note));
+  if(variants){
+    var sw = mk("div", "vswitch");
+    variants.forEach(function(v){
+      var b = mk("button", null, v.al);
+      b.setAttribute("aria-pressed", v.k === ex.k ? "true" : "false");
+      b.addEventListener("click", function(){
+        if(v.k === ex.k) return;
+        state.pick[v.alt] = v.k;
+        if(dr.vals[ex.k]){ dr.vals[v.k] = dr.vals[ex.k]; delete dr.vals[ex.k]; }
+        persist();
+        row.parentNode.replaceChild(liftRow(v, variants), row);
+      });
+      sw.appendChild(b);
+    });
+    nm.appendChild(sw);
+  }
+  var hh = state.lifts[ex.k];
+  var last = mk("div", "last num");
+  if(hh){
+    last.textContent = hh.w + "\u00d7" + hh.r;
+    if(hh.pw != null && (hh.w > hh.pw || (hh.w === hh.pw && hh.r > hh.pr))) last.appendChild(mk("span", "up", " \u2191"));
+  } else last.textContent = "\u2014";
+
+  var cur = dr.vals[ex.k] || {};
+  var inW = document.createElement("input");
+  inW.type = "number"; inW.inputMode = "decimal"; inW.placeholder = hh ? String(hh.w) : "lb";
+  inW.value = cur.w != null ? cur.w : "";
+  var inR = document.createElement("input");
+  inR.type = "number"; inR.inputMode = "numeric"; inR.placeholder = hh ? String(hh.r) : "reps";
+  inR.value = cur.r != null ? cur.r : "";
+  function sync(){
+    if(inW.value === "" && inR.value === "") delete dr.vals[ex.k];
+    else dr.vals[ex.k] = { w: inW.value, r: inR.value };
+    persist();
+  }
+  inW.addEventListener("input", sync); inR.addEventListener("input", sync);
+  var pair = mk("div"); pair.style.display = "flex"; pair.style.gap = "6px";
+  pair.appendChild(inW); pair.appendChild(inR);
+  row.appendChild(nm); row.appendChild(last); row.appendChild(pair);
+  return row;
+}
+
+function exerciseRows(list, box){
+  var seenAlt = {};
+  list.forEach(function(ex){
+    if(!ex.alt){ box.appendChild(liftRow(ex, null)); return; }
+    if(seenAlt[ex.alt]) return;
+    seenAlt[ex.alt] = true;
+    var variants = list.filter(function(o){ return o.alt === ex.alt; });
+    var k = pickFor(ex.alt, variants);
+    box.appendChild(liftRow(variants.filter(function(v){ return v.k === k; })[0], variants));
+  });
+}
+
+function renderTrainSeg(){
+  var seg = $("trainSeg"); seg.innerHTML = "";
+  [["log","Log"],["stats","Stats & growth"]].forEach(function(p){
+    var b = mk("button", null, p[1]);
+    b.setAttribute("aria-selected", (state.trainView || "log") === p[0] ? "true" : "false");
+    b.addEventListener("click", function(){ state.trainView = p[0]; renderTrain(); window.scrollTo(0,0); });
+    seg.appendChild(b);
+  });
+  var v = state.trainView || "log";
+  $("trainLog").hidden = v !== "log";
+  $("trainGuide").hidden = v !== "log";
+  $("trainStats").hidden = v !== "stats";
+}
+
+function renderTrainLog(){
+  var box = $("trainLog"); box.innerHTML = "";
+  var st = groupStatus(), dr = ensureDraft(), sug = suggestGroups(st);
+  var ls = lastSession(), streak = trainStreak(), doneToday = ls && ls.d === todayKey();
+
+  /* ---- muscle status ---- */
+  var mc = mk("div", "card" + (streak >= 6 && !doneToday ? " restcard" : ""));
+  mc.appendChild(mk("h2", null, "Muscles \u00b7 last 7 days"));
+  if(streak >= 6 && !doneToday){
+    var rb = mk("p", "note", streak + " days straight. Take today off and eat your full calories anyway \u2014 that's when the growing happens.");
+    rb.style.cssText = "margin:0 0 12px;color:var(--warn);font-weight:700";
+    mc.appendChild(rb);
+  }
+  GROUPS.forEach(function(G){
+    var s = st[G.id], d = s.last ? daysSince(s.last) : null;
+    var row = mk("div", "mrow");
+    var top = mk("div", "mtop");
+    top.appendChild(mk("b", null, G.n));
+    var when = d === null ? "Not yet" : d === 0 ? "Today" : d === 1 ? "Yesterday" : d + " days ago";
+    top.appendChild(mk("span", null, when));
+    if(d !== null && d <= 1) top.appendChild(mk("span", "rtag", "Recovering"));
+    else if(d !== null && d >= 4) top.appendChild(mk("span", "rtag fade", "Due"));
+    var sets = mk("span", "num mset", s.sets + " sets");
+    top.appendChild(sets);
+    row.appendChild(top);
+    var bar = mk("div", "mbar"), fill = mk("i");
+    var pct = Math.min(100, s.sets / (G.min * 1.8) * 100);
+    fill.style.width = pct + "%";
+    fill.style.background = s.sets >= G.min ? "var(--accent2)" : "var(--accent)";
+    var tick = mk("u"); tick.style.left = (G.min / (G.min * 1.8) * 100) + "%";
+    bar.appendChild(fill); bar.appendChild(tick);
+    row.appendChild(bar);
+    mc.appendChild(row);
+  });
+  var sl = mk("p", "note");
+  sl.appendChild(document.createTextNode("Tick = minimum weekly sets for growth. "));
+  sl.appendChild(document.createTextNode("Most rested right now: "));
+  sl.appendChild(mk("b", null, sug.map(groupName).join(" + ")));
+  sl.lastChild.style.color = "var(--ink)";
+  sl.appendChild(document.createTextNode("."));
+  mc.appendChild(sl);
+  box.appendChild(mc);
+
+  /* ---- today's session ---- */
+  var tc = mk("div", "card");
+  var th = mk("h2", null, "Today's session");
+  th.appendChild(mk("span", "num", todayKey()));
+  th.lastChild.style.cssText = "float:right;font-weight:600;letter-spacing:0;text-transform:none";
+  tc.appendChild(th);
+  tc.appendChild(mk("p", "note", "What are you hitting? Pick any combination."));
+  tc.lastChild.style.margin = "0 0 10px";
+  var chips = mk("div", "qgrid");
+  GROUPS.forEach(function(G){
+    var on = dr.sel.indexOf(G.id) !== -1;
+    var b = mk("button", null, G.n);
+    b.setAttribute("aria-pressed", on ? "true" : "false");
+    b.addEventListener("click", function(){
+      if(on) dr.sel.splice(dr.sel.indexOf(G.id), 1); else dr.sel.push(G.id);
+      persist(); renderTrainLog();
+    });
+    chips.appendChild(b);
+  });
+  tc.appendChild(chips);
+  if(sug.join() !== dr.sel.slice().sort().join() && sug.slice().sort().join() !== dr.sel.slice().sort().join()){
+    var use = mk("button", "link", "Use suggestion: " + sug.map(groupName).join(" + "));
+    use.style.marginTop = "8px";
+    use.addEventListener("click", function(){ dr.sel = sug.slice(); persist(); renderTrainLog(); });
+    tc.appendChild(use);
+  }
+
+  var ex = allEx();
+  GROUPS.forEach(function(G){
+    if(dr.sel.indexOf(G.id) === -1) return;
+    var gh = mk("div", "ghead");
+    gh.appendChild(mk("b", null, G.n));
+    gh.appendChild(mk("span", "num", st[G.id].sets + " / " + G.min + "+ sets this week"));
+    tc.appendChild(gh);
+    var wrap = mk("div");
+    exerciseRows(ex.filter(function(e){ return e.g === G.id && e.core; }), wrap);
+    tc.appendChild(wrap);
+
+    var extras = ex.filter(function(e){ return e.g === G.id && !e.core; });
+    var tog = mk("button", "link", (moreOpen[G.id] ? "Hide" : "More") + " " + G.n.toLowerCase() + " exercises" + (extras.length ? " (" + extras.length + ")" : ""));
+    tog.addEventListener("click", function(){ moreOpen[G.id] = !moreOpen[G.id]; renderTrainLog(); });
+    tc.appendChild(tog);
+    if(moreOpen[G.id]){
+      var mw = mk("div");
+      exerciseRows(extras, mw);
+      var add = mk("div", "addex");
+      var an = document.createElement("input"); an.type = "text"; an.placeholder = "Add your own " + G.n.toLowerCase() + " exercise";
+      var as = document.createElement("input"); as.type = "number"; as.inputMode = "numeric"; as.placeholder = "sets"; as.value = "3";
+      var ab = mk("button", "ghost", "Add");
+      ab.addEventListener("click", function(){
+        var name = an.value.trim(); if(!name) return;
+        var n = Math.max(1, Math.min(10, parseInt(as.value, 10) || 3));
+        state.custom = state.custom || [];
+        state.custom.push({ k: "c-" + Date.now(), n: name.slice(0, 60), g: G.id, s: n + " sets" });
+        persist(); renderTrainLog();
+      });
+      add.appendChild(an); add.appendChild(as); add.appendChild(ab);
+      mw.appendChild(add);
+      tc.appendChild(mw);
+    }
+  });
+
+  if(dr.sel.length){
+    tc.appendChild(mk("p", "note", "Grey = last time. Enter your top set only for what you did \u2014 unfinished entries survive closing the app."));
+    var sv = mk("button", "primary", "Save session");
+    sv.style.marginTop = "12px";
+    sv.addEventListener("click", saveSession);
+    tc.appendChild(sv);
+  } else {
+    tc.appendChild(mk("p", "note", "Pick at least one muscle group."));
+  }
+  var msg = mk("div", "saved", trainMsg); msg.id = "trainMsg";
+  tc.appendChild(msg);
+  box.appendChild(tc);
+}
+
+function saveSession(){
+  var dr = ensureDraft(), today = todayKey(), keys = [], prs = 0;
+  Object.keys(dr.vals).forEach(function(k){
+    if(!exByKey(k)) return;
+    var v = dr.vals[k], prev = state.lifts[k];
+    var w = parseFloat(v.w), r = parseFloat(v.r);
+    if(isNaN(w) && isNaN(r)) return;
+    if(isNaN(w)) w = prev ? prev.w : 0;
+    if(isNaN(r)) r = prev ? prev.r : 0;
+    var base = prev && prev.d === today ? { w: prev.pw, r: prev.pr } : (prev ? { w: prev.w, r: prev.r } : null);
+    if(base && base.w != null && (w > base.w || (w === base.w && r > base.r))) prs++;
+    state.lifts[k] = { w: w, r: r, d: today, pw: base ? base.w : null, pr: base ? base.r : null };
+    var hs = state.hist[k] = state.hist[k] || [];
+    if(hs.length && hs[hs.length - 1][0] === today) hs[hs.length - 1] = [today, w, r]; else hs.push([today, w, r]);
+    if(hs.length > 80) state.hist[k] = hs.slice(-80);
+    keys.push(k);
+  });
+  if(!keys.length){ flash("Enter at least one lift to save"); renderTrainLog(); return; }
+  var t = state.sessions.filter(function(s){ return s.d === today; })[0];
+  if(t){ t.x = union(t.x, keys); t.g = union(t.g, dr.sel); }
+  else { state.sessions.push({ d: today, g: dr.sel.slice(), x: keys }); }
+  if(state.sessions.length > 200) state.sessions = state.sessions.slice(-200);
+  dr.vals = {};
+  var groups = {}; keys.forEach(function(k){ groups[groupName(exByKey(k).g)] = 1; });
+  flash("Saved \u00b7 " + Object.keys(groups).join(" + ") + " \u00b7 " + keys.length + " lift" + (keys.length === 1 ? "" : "s") + (prs ? " \u00b7 " + prs + " beat last time \u2191" : ""));
+  persist(); renderTrainLog();
+}
+
+/* ---- stats & growth ---- */
+function metricOf(w, r){ return w > 0 ? w * (1 + Math.min(r, 12) / 30) : r; }
+function spark(vals){
+  var W = 72, H = 24, NS = "http://www.w3.org/2000/svg";
+  var svg = document.createElementNS(NS, "svg");
+  svg.setAttribute("viewBox", "0 0 " + W + " " + H); svg.setAttribute("class", "spark");
+  svg.setAttribute("aria-hidden", "true");
+  if(vals.length < 2) return svg;
+  var lo = Math.min.apply(null, vals), hi = Math.max.apply(null, vals); if(hi === lo){ hi += 1; lo -= 1; }
+  var pts = vals.map(function(v, i){ return (i / (vals.length - 1) * (W - 4) + 2).toFixed(1) + "," + (H - 3 - (v - lo) / (hi - lo) * (H - 6)).toFixed(1); });
+  var pl = document.createElementNS(NS, "polyline");
+  pl.setAttribute("points", pts.join(" ")); pl.setAttribute("fill", "none");
+  pl.setAttribute("stroke", vals[vals.length - 1] >= vals[0] ? "var(--accent2)" : "var(--accent)");
+  pl.setAttribute("stroke-width", "2"); pl.setAttribute("stroke-linejoin", "round"); pl.setAttribute("stroke-linecap", "round");
+  svg.appendChild(pl);
+  return svg;
+}
+function renderTrainStats(){
+  var box = $("trainStats"); box.innerHTML = "";
+  var keys = Object.keys(state.hist).filter(function(k){ return exByKey(k) && state.hist[k].length; });
+
+  var wk = state.sessions.filter(function(s){ return daysSince(s.d) < 7; });
+  var sets = 0; wk.forEach(function(s){ (s.x || []).forEach(function(k){ var e = exByKey(k); if(e) sets += setsOf(e); }); });
+  var beat = keys.filter(function(k){ var l = state.lifts[k]; return l && daysSince(l.d) < 7 && l.pw != null && (l.w > l.pw || (l.w === l.pw && l.r > l.pr)); }).length;
+
+  var sc = mk("div", "card");
+  sc.appendChild(mk("h2", null, "This week"));
+  var g = mk("div", "grid");
+  [[wk.length, "sessions"], [sets, "working sets"], [beat, "lifts beat"], [keys.length, "lifts tracked"]].forEach(function(p){
+    var s = mk("div", "stat"); s.appendChild(mk("b", "num", String(p[0]))); s.appendChild(mk("span", null, p[1])); g.appendChild(s);
+  });
+  sc.appendChild(g);
+  box.appendChild(sc);
+
+  if(!keys.length){
+    var ec = mk("div", "card");
+    ec.appendChild(mk("p", "note", "Log a few sessions and every lift's growth shows up here \u2014 strength trend, change since you started, and your best sets."));
+    ec.lastChild.style.margin = "0";
+    box.appendChild(ec); return;
+  }
+
+  function change(k){
+    var h = state.hist[k]; if(h.length < 2) return null;
+    var a = metricOf(h[0][1], h[0][2]), b = metricOf(h[h.length - 1][1], h[h.length - 1][2]);
+    return a > 0 ? (b - a) / a * 100 : null;
+  }
+  var ranked = keys.map(function(k){ return { k: k, c: change(k) }; }).filter(function(x){ return x.c !== null && x.c > 0; })
+    .sort(function(a, b){ return b.c - a.c; }).slice(0, 3);
+  if(ranked.length){
+    var bc = mk("div", "card");
+    bc.appendChild(mk("h2", null, "Biggest gains"));
+    ranked.forEach(function(x){
+      var r = mk("div", "lrow");
+      r.appendChild(mk("div", "nmm", exByKey(x.k).n));
+      r.appendChild(mk("div", "num gain", "+" + x.c.toFixed(1) + "%"));
+      bc.appendChild(r);
+    });
+    box.appendChild(bc);
+  }
+
+  GROUPS.forEach(function(G){
+    var gk = keys.filter(function(k){ return exByKey(k).g === G.id; })
+      .sort(function(a, b){ return state.lifts[b] && state.lifts[a] ? (state.lifts[b].d > state.lifts[a].d ? 1 : -1) : 0; });
+    if(!gk.length) return;
+    var c = mk("div", "card");
+    c.appendChild(mk("h2", null, G.n));
+    gk.forEach(function(k){
+      var h = state.hist[k], e = exByKey(k), l = h[h.length - 1];
+      var best = h.reduce(function(m, p){ return metricOf(p[1], p[2]) > metricOf(m[1], m[2]) ? p : m; }, h[0]);
+      var r = mk("div", "lrow");
+      var nm = mk("div", "nmm", e.n);
+      var bw = l[1] === 0;
+      nm.appendChild(mk("em", null, "Last " + (bw ? "BW" : l[1]) + "\u00d7" + l[2] +
+        (bw ? "" : " \u00b7 est. max " + Math.round(metricOf(l[1], l[2]))) +
+        " \u00b7 best " + (best[1] === 0 ? "BW" : best[1]) + "\u00d7" + best[2] + " \u00b7 " + h.length + " log" + (h.length === 1 ? "" : "s")));
+      r.appendChild(nm);
+      r.appendChild(spark(h.map(function(p){ return metricOf(p[1], p[2]); })));
+      var ch = change(k);
+      var cd = mk("div", "num gain", ch === null ? "new" : (ch >= 0 ? "+" : "") + ch.toFixed(1) + "%");
+      if(ch !== null && ch < 0) cd.style.color = "var(--accent)";
+      if(ch === null) cd.style.color = "var(--ink2)";
+      r.appendChild(cd);
+      c.appendChild(r);
+    });
+    box.appendChild(c);
+  });
+  var nc = mk("div", "card");
+  nc.appendChild(mk("p", "note", "Growth is tracked as estimated one-rep max, so 175\u00d710 counts as progress over 180\u00d76 when it's genuinely stronger. Bodyweight lifts track reps. Percentages compare your latest top set against your first."));
+  nc.lastChild.style.margin = "0";
+  box.appendChild(nc);
+}
+
+function renderTrain(){
+  renderTrainSeg();
+  if((state.trainView || "log") === "log") renderTrainLog(); else renderTrainStats();
+}
+
+/* =================== SHOP: quiz + cost engine =================== */
+/* Baseline Walmart prices, Sept 2026. Great Value where it exists,
+   value packs on meat. Every one is editable by the user. */
+
+var PROTEINS = [
+  {id:"pchick",  n:"Chicken breast, value pack", u:"lb", p:3.29, lb:0.50},
+  {id:"pthigh",  n:"Chicken thighs, bone-in",    u:"lb", p:1.99, lb:0.80},
+  {id:"pbeef",   n:"Ground beef 90/10",          u:"lb", p:6.97, lb:0.50},
+  {id:"pchuck",  n:"Beef chuck roast (ragu)",    u:"lb", p:6.48, lb:0.40},
+  {id:"psalmon", n:"Salmon fillets, frozen",     u:"lb", p:9.98, lb:0.50},
+  {id:"ppork",   n:"Pork shoulder",              u:"lb", p:2.48, lb:0.55},
+  {id:"pchor",   n:"Chorizo",                    u:"lb", p:5.98, lb:0.40}
+];
+var STARCHES = [
+  {id:"srice",  n:"White rice",      u:"5 lb bag", p:4.97,  per:0.40, size:5},
+  {id:"spot",   n:"Russet potatoes", u:"5 lb bag", p:4.18,  per:0.80, size:5},
+  {id:"ssweet", n:"Sweet potatoes",  u:"lb",       p:1.28,  per:0.80, size:1},
+  {id:"spasta", n:"Pasta",           u:"1 lb box", p:0.98,  per:0.35, size:1},
+  {id:"sbread", n:"Sourdough loaf",  u:"loaf",     p:3.48,  per:0,    size:1, wk:1}
+];
+/* Staples: wk = units bought per week (fractional = lasts longer) */
+var STAPLES = [
+  {id:"eggs",  n:"Eggs, large",              u:"dozen",     p:2.19, wk:2,    tag:"breakfast"},
+  {id:"oats",  n:"Quick oats",               u:"42 oz tub", p:4.18, wk:0.47, tag:"breakfast"},
+  {id:"milk",  n:"Whole milk",               u:"gallon",    p:3.24, wk:1,    tag:"breakfast"},
+  {id:"yog",   n:"Greek yogurt",             u:"32 oz",     p:4.48, wk:1,    tag:"snack"},
+  {id:"whey",  n:"Whey protein",             u:"5 lb tub",  p:44.98,wk:0.13, tag:"snack"},
+  {id:"pb",    n:"Peanut butter",            u:"40 oz",     p:4.98, wk:0.35, tag:"snack"},
+  {id:"oil",   n:"Olive oil",                u:"25.5 oz",   p:8.98, wk:0.30, tag:"fat"},
+  {id:"but",   n:"Butter",                   u:"1 lb",      p:3.06, wk:0.50, tag:"fat"},
+  {id:"nuts",  n:"Walnuts or almonds",       u:"16 oz",     p:6.98, wk:0.35, tag:"fat"},
+  {id:"dates", n:"Dates",                    u:"16 oz",     p:5.48, wk:0.25, tag:"fat"},
+  {id:"parm",  n:"Parmesan",                 u:"8 oz",      p:4.48, wk:0.40, tag:"dairy"},
+  {id:"fveg",  n:"Frozen mixed veg",         u:"12 oz bag", p:0.98, wk:4,    tag:"veg"},
+  {id:"broc",  n:"Broccoli florets",         u:"12 oz bag", p:1.16, wk:2,    tag:"veg"},
+  {id:"onion", n:"Onions",                   u:"3 lb bag",  p:3.48, wk:0.50, tag:"veg"},
+  {id:"salad", n:"Salad greens",             u:"clamshell", p:2.48, wk:1,    tag:"veg"},
+  {id:"ban",   n:"Bananas",                  u:"3 lb",      p:1.86, wk:1,    tag:"fruit"},
+  {id:"apple", n:"Apples",                   u:"3 lb bag",  p:4.48, wk:1,    tag:"fruit"},
+  {id:"tom",   n:"Canned tomatoes",          u:"28 oz",     p:1.48, wk:1,    tag:"pantry"},
+  {id:"bean",  n:"Cannellini beans",         u:"15 oz can", p:0.86, wk:2,    tag:"pantry"},
+  {id:"spice", n:"Spices, sauces, aromatics",u:"allowance", p:6.00, wk:1,    tag:"pantry"}
+];
+
+var QUESTIONS = [
+  {k:"proteins", q:"Which proteins do you want in rotation?", opts:PROTEINS,
+   sub:function(o){ return "$" + o.p.toFixed(2) + "/lb"; }},
+  {k:"starches", q:"Which starches?", opts:STARCHES,
+   sub:function(o){ return "$" + o.p.toFixed(2) + " / " + o.u; }}
+];
+
+function priceOf(item){
+  var o = state.prices[item.id];
+  return (typeof o === "number" && o > 0) ? o : item.p;
+}
+function selected(key){ return (state.prefs && state.prefs[key]) || []; }
+function isOn(key, id){ return selected(key).indexOf(id) !== -1; }
+function toggle(key, id){
+  state.prefs = state.prefs || {proteins:[], starches:[], dinners:5};
+  var a = state.prefs[key] = (state.prefs[key] || []).slice();
+  var i = a.indexOf(id);
+  if(i === -1) a.push(id); else a.splice(i, 1);
+}
+function quizDone(){
+  return state.prefs && selected("proteins").length > 0 && selected("starches").length > 0;
+}
+
+/* Build the week's list from the answers. */
+function buildList(){
+  var dinners = (state.prefs && state.prefs.dinners) || 5;
+  var rows = [], pIds = selected("proteins"), sIds = selected("starches");
+
+  // dinners split evenly across chosen proteins
+  var perProtein = pIds.length ? dinners / pIds.length : 0;
+  PROTEINS.forEach(function(o){
+    if(!isOn("proteins", o.id)) return;
+    var lbs = perProtein * o.lb;
+    rows.push({ id:o.id, n:o.n, qty:lbs.toFixed(1) + " lb", cost:lbs * priceOf(o),
+                unitP:priceOf(o), unitL:"/lb", cat:"Protein", item:o });
+  });
+
+  var starchDinners = sIds.length ? dinners / Math.max(1, sIds.filter(function(x){ return x !== "sbread"; }).length) : 0;
+  STARCHES.forEach(function(o){
+    if(!isOn("starches", o.id)) return;
+    var units, qty;
+    if(o.id === "sbread"){ units = 1; qty = "1 loaf"; }
+    else {
+      var lbs = starchDinners * o.per;
+      units = lbs / o.size;
+      qty = o.size > 1 ? (units < 1 ? "part of a bag" : Math.round(units) + " \u00d7 " + o.u)
+                       : lbs.toFixed(1) + " lb";
+    }
+    rows.push({ id:o.id, n:o.n, qty:qty, cost:units * priceOf(o),
+                unitP:priceOf(o), unitL:"/" + o.u, cat:"Starch", item:o });
+  });
+
+  STAPLES.forEach(function(o){
+    var units = o.wk;
+    var qty = units >= 1 ? Math.round(units) + " \u00d7 " + o.u
+            : "1 " + o.u + " every " + Math.round(1/units) + " wk";
+    rows.push({ id:o.id, n:o.n, qty:qty, cost:units * priceOf(o),
+                unitP:priceOf(o), unitL:"/" + o.u, cat:"Staples", item:o });
+  });
+  return rows;
+}
+
+var editing = null;
+
+function renderShop(){
+  var qw = $("quizWrap"), lw = $("listWrap");
+  qw.innerHTML = ""; lw.innerHTML = "";
+
+  if(!quizDone() || state.showQuiz){
+    var card = document.createElement("div");
+    card.className = "card";
+    card.innerHTML = '<h2>Build your list</h2>';
+
+    QUESTIONS.forEach(function(Q, qi){
+      var h = document.createElement("h3");
+      h.innerHTML = '<span class="stepnum">' + (qi+1) + '</span>';
+      h.appendChild(document.createTextNode(Q.q));
+      card.appendChild(h);
+      var g = document.createElement("div"); g.className = "qgrid";
+      Q.opts.forEach(function(o){
+        var b = document.createElement("button");
+        b.appendChild(document.createTextNode(o.n));
+        var s = document.createElement("small"); s.textContent = Q.sub(o); b.appendChild(s);
+        b.setAttribute("aria-pressed", isOn(Q.k, o.id) ? "true" : "false");
+        b.addEventListener("click", function(){ toggle(Q.k, o.id); persist(); renderShop(); });
+        g.appendChild(b);
+      });
+      card.appendChild(g);
+    });
+
+    var h3 = document.createElement("h3");
+    h3.innerHTML = '<span class="stepnum">3</span>';
+    h3.appendChild(document.createTextNode("Dinners cooked at home per week?"));
+    card.appendChild(h3);
+    var g3 = document.createElement("div"); g3.className = "qgrid";
+    [3,4,5,6,7].forEach(function(n){
+      var b = document.createElement("button");
+      b.textContent = String(n);
+      b.style.minWidth = "52px"; b.style.textAlign = "center";
+      b.setAttribute("aria-pressed", ((state.prefs && state.prefs.dinners) || 5) === n ? "true" : "false");
+      b.addEventListener("click", function(){
+        state.prefs = state.prefs || {proteins:[], starches:[]};
+        state.prefs.dinners = n; persist(); renderShop();
+      });
+      g3.appendChild(b);
+    });
+    card.appendChild(g3);
+
+    var h4 = document.createElement("h3");
+    h4.innerHTML = '<span class="stepnum">4</span>';
+    h4.appendChild(document.createTextNode("Weekly grocery budget"));
+    card.appendChild(h4);
+    var bi = document.createElement("input");
+    bi.type = "number"; bi.inputMode = "decimal"; bi.value = state.budget;
+    bi.addEventListener("change", function(){
+      var v = parseFloat(bi.value);
+      if(!isNaN(v) && v > 0){ state.budget = v; persist(); }
+    });
+    card.appendChild(bi);
+
+    if(quizDone()){
+      var go = document.createElement("button");
+      go.className = "primary"; go.style.marginTop = "14px";
+      go.textContent = "See the list";
+      go.addEventListener("click", function(){ state.showQuiz = false; renderShop(); window.scrollTo(0,0); });
+      card.appendChild(go);
+    } else {
+      var hint = document.createElement("p");
+      hint.className = "note";
+      hint.textContent = "Pick at least one protein and one starch.";
+      card.appendChild(hint);
+    }
+    qw.appendChild(card);
+    return;
+  }
+
+  /* ---- the list ---- */
+  var rows = buildList(), total = 0;
+  rows.forEach(function(r){ total += r.cost; });
+
+  var cats = ["Protein","Starch","Staples"];
+  cats.forEach(function(cat){
+    var sub = rows.filter(function(r){ return r.cat === cat; });
+    if(!sub.length) return;
+    var c = document.createElement("div"); c.className = "card";
+    var h = document.createElement("h2");
+    var cs = 0; sub.forEach(function(r){ cs += r.cost; });
+    h.textContent = cat;
+    var sp = document.createElement("span");
+    sp.className = "num";
+    sp.style.cssText = "float:right;font-weight:700;letter-spacing:0;text-transform:none";
+    sp.textContent = "$" + cs.toFixed(2);
+    h.appendChild(sp);
+    c.appendChild(h);
+
+    sub.forEach(function(r){
+      var row = document.createElement("div"); row.className = "lrow";
+      var nm = document.createElement("div"); nm.className = "nmm";
+      nm.appendChild(document.createTextNode(r.n));
+      var em = document.createElement("em"); em.textContent = r.qty; nm.appendChild(em);
+      row.appendChild(nm);
+
+      if(editing === r.id){
+        var inp = document.createElement("input");
+        inp.type = "number"; inp.step = "0.01"; inp.inputMode = "decimal";
+        inp.className = "pe"; inp.value = r.unitP.toFixed(2);
+        inp.addEventListener("blur", function(){
+          var v = parseFloat(inp.value);
+          if(!isNaN(v) && v >= 0) state.prices[r.id] = v;
+          editing = null; persist(); renderShop();
+        });
+        inp.addEventListener("keydown", function(e){ if(e.key === "Enter") inp.blur(); });
+        row.appendChild(inp);
+        setTimeout(function(){ inp.focus(); inp.select(); }, 0);
+      } else {
+        var pb = document.createElement("button");
+        pb.className = "pp";
+        pb.textContent = "$" + r.unitP.toFixed(2) + r.unitL;
+        pb.title = "Tap to correct this price";
+        pb.addEventListener("click", function(){ editing = r.id; renderShop(); });
+        row.appendChild(pb);
+        var cst = document.createElement("div");
+        cst.className = "num";
+        cst.style.cssText = "width:58px;text-align:right;font-weight:700";
+        cst.textContent = "$" + r.cost.toFixed(2);
+        row.appendChild(cst);
+      }
+      c.appendChild(row);
+    });
+    lw.appendChild(c);
+  });
+
+  var tc = document.createElement("div"); tc.className = "card";
+  var tr = document.createElement("div"); tr.className = "totrow";
+  var ts = document.createElement("span"); ts.textContent = "Weekly total";
+  var tb = document.createElement("b"); tb.className = "num"; tb.textContent = "$" + total.toFixed(2);
+  tr.appendChild(ts); tr.appendChild(tb); tc.appendChild(tr);
+
+  var diff = state.budget - total;
+  var v = document.createElement("div");
+  v.className = "verdict " + (diff >= 0 ? "vok" : "vover");
+  if(diff >= 0){
+    v.textContent = "$" + diff.toFixed(2) + " under your $" + state.budget.toFixed(0) +
+      " budget. That's $" + (total/7).toFixed(2) + " a day, about $" +
+      (total / 7 / (state.cal/1000)).toFixed(2) + " per 1,000 calories.";
+  } else {
+    var over = -diff, sw = [];
+    if(isOn("proteins","psalmon")) sw.push("swap salmon for chicken thighs (saves ~$4/dinner)");
+    if(isOn("proteins","pbeef")) sw.push("move some beef dinners to pork shoulder (~$2.25/lb cheaper)");
+    if(!isOn("proteins","pthigh")) sw.push("add bone-in thighs at $1.99/lb as your cheap rotation");
+    sw.push("buy meat in family packs and freeze in portions \u2014 10\u201320% off the unit price");
+    v.textContent = "$" + over.toFixed(2) + " over budget. Try: " + sw.slice(0,2).join("; ") + ".";
+  }
+  tc.appendChild(v);
+
+  var note = document.createElement("p");
+  note.className = "note";
+  note.textContent = "Pantry items are amortized \u2014 a whey tub is charged at a fraction per week because it lasts about two months. Your actual cart some weeks will be lower, some higher.";
+  tc.appendChild(note);
+
+  var redo = document.createElement("button");
+  redo.className = "primary"; redo.style.marginTop = "12px";
+  redo.textContent = "Redo the quiz";
+  redo.addEventListener("click", function(){ state.showQuiz = true; renderShop(); window.scrollTo(0,0); });
+  tc.appendChild(redo);
+  lw.appendChild(tc);
+}
+
+/* =================== RECIPES: checklist, favorites, fading, fresh ideas =================== */
+var RECIPES = [
+  {id:"r-harissa", meal:"dinner", name:"Harissa chicken thighs, saffron rice, yogurt", serves:2, cal:900, p:58, f:38, c:82,
+   ing:["6 bone-in chicken thighs (~2 lb)","3 tbsp harissa paste","1 tsp ground cumin","1 lemon, zested and juiced","2 onions, sliced","1 cup basmati rice","Pinch of saffron","2 cups chicken stock","1 cup Greek yogurt","30g pistachios, chopped","Handful of mint or cilantro"],
+   method:"Rub the thighs with harissa, cumin and lemon zest. Roast skin-up at 425\u00b0F on the sliced onion for 35\u201340 minutes until the skin renders and crisps. Bloom the rice in a spoon of the chicken fat, add saffron and hot stock, cover and cook 15 minutes, rest 5. Plate with yogurt, pistachios, herbs and a squeeze of lemon."},
+  {id:"r-miso", meal:"dinner", name:"Miso-butter salmon, sweet potato mash", serves:1, cal:870, p:48, f:45, c:62,
+   ing:["8 oz salmon fillet","1 tbsp white miso","1 tbsp softened butter","1 tsp mirin","1 large sweet potato (~12 oz)","1 tbsp butter + splash of cream for the mash","1 bunch broccolini","1 garlic clove, sliced","Pinch of chilli flakes"],
+   method:"Microwave or boil the sweet potato until soft, mash with butter, cream and salt. Mix miso, butter and mirin into a paste and smear over the salmon. Broil 7\u20139 minutes until it blisters. Char the broccolini hard in a hot pan, add garlic and chilli for the last 30 seconds."},
+  {id:"r-ragu", meal:"dinner", name:"Beef rag\u00f9, pappardelle, parmesan", serves:6, cal:950, p:52, f:40, c:88,
+   ing:["1.5 lb beef chuck, cubed","1 lb ground beef 90/10","1 onion, 1 carrot, 2 celery sticks, finely diced","3 tbsp tomato paste","1 cup red wine","28 oz canned tomatoes","2 cups beef stock","1.5 lb pappardelle or wide pasta","Parmesan, to finish","Butter, to finish"],
+   method:"Brown the chuck and ground beef hard in batches. Soften the soffritto in the fat, cook the tomato paste until brick red, deglaze with wine. Add tomatoes, stock and the beef, simmer lid ajar 3 hours until the chuck falls apart. Freeze in portions. Per plate: toss pasta with sauce, a splash of pasta water, butter and a heavy hand of parmesan."},
+  {id:"r-chorizo", meal:"dinner", name:"Chorizo & white bean stew, runny eggs", serves:2, cal:820, p:45, f:44, c:58,
+   ing:["8 oz chorizo, sliced","1 onion, diced","1 red pepper, sliced","2 cans cannellini beans, drained","1 tsp smoked paprika","1 cup chicken stock","4 eggs","4 slices sourdough"],
+   method:"Render the chorizo until the fat runs red. Soften onion and pepper in it, add paprika, beans and stock and simmer 10 minutes until thick. Make four wells, crack in the eggs, lid on for 5 minutes until the whites set. Toast the sourdough to mop it up."},
+  {id:"r-noodle", meal:"dinner", name:"Peanut-sesame noodles, seared pork", serves:2, cal:930, p:50, f:42, c:92,
+   ing:["1 lb pork shoulder, sliced thin","8 oz wheat noodles","4 tbsp peanut butter","3 tbsp soy sauce","1 tbsp black or rice vinegar","1 tbsp sesame oil","1 tbsp chilli crisp","1 cucumber, cut into batons","3 scallions, sliced","30g roasted peanuts, crushed"],
+   method:"Whisk peanut butter, soy, vinegar, sesame oil and chilli crisp. Sear the pork in a screaming hot pan in two batches. Cook the noodles, save a cup of the water, and loosen the sauce with it until glossy. Toss noodles, sauce and pork; top with cucumber, scallion and peanuts."},
+  {id:"r-carnitas", meal:"dinner", name:"Crispy carnitas rice bowls", serves:4, cal:920, p:55, f:40, c:85,
+   ing:["3 lb pork shoulder, in large chunks","1 orange, juiced","1 onion, quartered","4 garlic cloves","2 tsp cumin + 1 tsp oregano","2 cups white rice","1 can black beans","2 avocados","2 limes","Salsa or pickled onions"],
+   method:"Season the pork, braise with orange juice, onion, garlic and a cup of water, covered, at 300\u00b0F for 3 hours. Shred, then crisp it in batches in a hot pan with a little of its own fat. Build bowls with lime rice, beans, avocado and salsa. Leftover pork crisps up again in two minutes."},
+  {id:"r-tikka", meal:"dinner", name:"Chicken thigh tikka masala", serves:3, cal:880, p:55, f:35, c:85,
+   ing:["2 lb boneless chicken thighs","1 cup Greek yogurt","2 tbsp garam masala + 1 tsp turmeric + 1 tsp cumin","1 onion, finely diced","4 garlic cloves + thumb of ginger, grated","28 oz canned tomatoes","1/2 cup heavy cream","1.5 cups basmati rice","2 tbsp butter","Cilantro"],
+   method:"Marinate the thighs in yogurt and half the spices for at least an hour, then char under the broiler until blackened at the edges. Soften onion in butter, add garlic, ginger and remaining spices, then tomatoes; simmer 20 minutes and blend if you like it smooth. Stir in cream and the chicken, simmer 10 more. Serve over basmati."},
+  {id:"r-smash", meal:"dinner", name:"Double smash burgers, crispy wedges", serves:2, cal:1000, p:55, f:50, c:80,
+   ing:["1 lb ground beef (80/20 smashes best)","2 brioche buns","4 slices American cheese","1 onion, sliced paper thin","Pickles","2 tbsp mayo + 1 tbsp ketchup + pinch of paprika","1.5 lb russet potatoes, in wedges","1 tbsp oil"],
+   method:"Toss the wedges in oil and salt and roast at 450\u00b0F for 35 minutes, flipping once. Roll the beef into four balls. On a ripping hot pan, smash each flat with onion on top, salt hard, cook 2 minutes, flip, add cheese. Stack two per bun with pickles and the sauce."},
+  {id:"r-orzo", meal:"dinner", name:"Lemon-garlic chicken orzo", serves:3, cal:850, p:60, f:24, c:95,
+   ing:["1.5 lb chicken breast, cubed","1.5 cups orzo","3 cups chicken stock","1 lemon, zested and juiced","5 garlic cloves, minced","3 big handfuls spinach","1/2 cup grated parmesan","2 tbsp butter"],
+   method:"Sear the chicken in butter until golden and set aside. Toast the orzo in the same pan with garlic, then add stock and simmer, stirring, until creamy \u2014 about 12 minutes. Stir in spinach, lemon, parmesan and the chicken. One pan, twenty-five minutes."},
+  {id:"r-shak", meal:"breakfast", name:"Shakshuka with feta", serves:1, cal:700, p:38, f:42, c:48,
+   ing:["4 eggs","14 oz canned tomatoes (half a large can)","1/2 onion, diced","1/2 red pepper, diced","1 tsp cumin + 1 tsp paprika","2 oz feta","1 tbsp olive oil, plus more to finish","2 slices sourdough"],
+   method:"Soften onion and pepper in olive oil, add spices, then tomatoes; simmer 8 minutes until thick. Make wells, crack in the eggs, cover until the whites set. Crumble feta over, finish with olive oil, eat with toasted sourdough."},
+  {id:"r-oats", meal:"breakfast", name:"Brown-butter oats, dates, walnuts", serves:1, cal:680, p:34, f:24, c:82,
+   ing:["80g oats","1.5 cups whole milk","1 tbsp butter","3 dates, chopped","20g walnuts, toasted","1 scoop whey protein","Flaky salt"],
+   method:"Cook the oats in milk. In a small pan, brown the butter until it smells nutty. Take the oats off the heat, stir in the whey so it doesn't seize, then top with brown butter, dates, walnuts and flaky salt."},
+  {id:"r-hash", meal:"breakfast", name:"Steak, eggs & potato hash", serves:1, cal:760, p:52, f:44, c:40,
+   ing:["6 oz sirloin or leftover steak","10 oz potatoes, diced small","1/2 onion, diced","2 eggs","1 tbsp oil","Hot sauce"],
+   method:"Crisp the potatoes in oil for 12\u201315 minutes, add onion for the last five. Sear or reheat the steak, slice it over the hash, fry two eggs on top, hot sauce to finish."},
+  {id:"r-bowl", meal:"breakfast", name:"Greek yogurt power bowl", serves:1, cal:700, p:40, f:20, c:90,
+   ing:["1.5 cups Greek yogurt","60g granola","1 banana, sliced","1 tbsp honey","1 tbsp peanut butter"],
+   method:"Yogurt in the bowl, granola and banana on top, honey and peanut butter drizzled over. Two minutes, zero cooking \u2014 the one for rushed mornings."},
+  {id:"r-burrito", meal:"breakfast", name:"Freezer breakfast burritos", serves:4, cal:750, p:38, f:40, c:58,
+   ing:["8 eggs","8 oz chorizo","1 lb potatoes, diced small","4 large flour tortillas","1 cup shredded cheese","Salsa"],
+   method:"Crisp the potatoes, add the chorizo and cook through. Soft-scramble the eggs separately. Fill each tortilla with potatoes, chorizo, eggs, cheese and salsa, roll tight, wrap in foil and freeze. Reheat from frozen: 2 minutes in the microwave, then a minute in a dry pan to crisp."}
+];
+
+var REC_SLOTS = 6, REC_TTL = 14, REC_NEW = 2;
+var sampleFn = null, genBusy = false, genMsg = "", genCtl = null;
+
+function daysSince(k){
+  if(!k) return 0;
+  var a = new Date(k + "T00:00:00"), b = new Date(todayKey() + "T00:00:00");
+  return Math.max(0, Math.round((b - a) / 86400000));
+}
+function allRecipes(){
+  var ai = Object.keys(state.aiRecipes || {}).map(function(k){ return state.aiRecipes[k]; });
+  ai.sort(function(a,b){ return (b.created||0) - (a.created||0); });
+  return ai.concat(RECIPES);
+}
+function recipeById(id){
+  if(state.aiRecipes && state.aiRecipes[id]) return state.aiRecipes[id];
+  for(var i=0;i<RECIPES.length;i++) if(RECIPES[i].id === id) return RECIPES[i];
+  return null;
+}
+function recDaysLeft(id){ return REC_TTL - daysSince(state.recs[id]); }
+
+/* Rotate the recommendation list: drop what's been sitting unfavorited for REC_TTL days,
+   then refill empty slots from recipes he hasn't seen yet. Favorites never expire. */
+function refreshRecs(){
+  var expired = 0, k;
+  // one-time migration: earlier version dropped favorites; put them back
+  for(k in state.archived){ if(Object.prototype.hasOwnProperty.call(state.archived, k) && recipeById(k) && !state.saved[k]) state.saved[k] = { savedAt: todayKey(), cooks: 0 }; }
+  state.archived = {};
+
+  Object.keys(state.recs).forEach(function(id){
+    if(!recipeById(id) || state.saved[id] || state.hidden.indexOf(id) !== -1){ delete state.recs[id]; return; }
+    if(daysSince(state.recs[id]) >= REC_TTL){
+      delete state.recs[id]; state.expired[id] = todayKey(); delete state.checks[id]; expired++;
+    }
+  });
+
+  var need = REC_SLOTS - Object.keys(state.recs).length;
+  if(need > 0){
+    var fresh = allRecipes().filter(function(r){
+      return !state.recs[r.id] && !state.saved[r.id] && !state.expired[r.id] && state.hidden.indexOf(r.id) === -1;
+    });
+    // nothing unseen left: recycle the built-ins that expired longest ago
+    if(fresh.length < need){
+      var old = RECIPES.filter(function(r){ return state.expired[r.id] && !state.saved[r.id] && !state.recs[r.id] && state.hidden.indexOf(r.id) === -1; })
+        .sort(function(a, b){ return state.expired[a.id] < state.expired[b.id] ? -1 : 1; });
+      fresh = fresh.concat(old);
+    }
+    fresh.slice(0, need).forEach(function(r){ state.recs[r.id] = todayKey(); delete state.expired[r.id]; });
+  }
+  if(expired) state.justRotated = (state.justRotated || 0) + expired;
+  pruneAI();
+  return expired;
+}
+function pruneAI(){
+  Object.keys(state.aiRecipes).forEach(function(k){
+    if(!state.saved[k] && !state.recs[k]){ delete state.aiRecipes[k]; delete state.expired[k]; }
+  });
+}
+
+function saveRecipe(id){
+  if(!state.saved[id]) state.saved[id] = { savedAt: todayKey(), cooks: 0 };
+  delete state.recs[id]; delete state.expired[id];
+  var hi = state.hidden.indexOf(id); if(hi !== -1) state.hidden.splice(hi, 1);
+  refreshRecs();
+}
+function unsaveRecipe(id){ delete state.saved[id]; state.expired[id] = todayKey(); }
+function cookRecipe(id){
+  var s = state.saved[id] || { savedAt: todayKey(), cooks: 0 };
+  s.cooks = (s.cooks || 0) + 1; s.last = todayKey();
+  state.saved[id] = s; delete state.recs[id]; delete state.expired[id]; delete state.checks[id];
+  refreshRecs();
+}
+function toggleCheck(id, i){
+  var a = (state.checks[id] || []).slice(), at = a.indexOf(i);
+  if(at === -1) a.push(i); else a.splice(at, 1);
+  if(a.length) state.checks[id] = a; else delete state.checks[id];
+}
+
+function cleanRecipe(x){
+  if(!x || typeof x.name !== "string" || !Array.isArray(x.ingredients) || typeof x.method !== "string") return null;
+  function n(v, lo, hi){ v = Number(v); return isFinite(v) ? Math.max(lo, Math.min(hi, Math.round(v))) : 0; }
+  var ing = x.ingredients.filter(function(s){ return typeof s === "string" && s.trim(); })
+                         .slice(0, 16).map(function(s){ return s.trim().slice(0, 120); });
+  if(ing.length < 3 || !x.name.trim()) return null;
+  return { name: x.name.trim().slice(0, 80), meal: x.meal === "breakfast" ? "breakfast" : "dinner",
+           serves: n(x.serves, 1, 12) || 1, cal: n(x.cal, 0, 2500), p: n(x.p, 0, 250), f: n(x.f, 0, 250), c: n(x.c, 0, 500),
+           ing: ing, method: x.method.trim().slice(0, 900) };
+}
+
+function generateIdeas(pantry){
+  if(pantry && pantry.type) pantry = null;  /* called as a click handler */
+  if(!sampleFn || genBusy) return;
+  genBusy = true; genMsg = "Thinking up recipes\u2026 this takes 20\u201360 seconds."; renderFood();
+  var favs = Object.keys(state.saved).map(recipeById).filter(Boolean)
+    .sort(function(a,b){ return (state.saved[b.id].cooks||0) - (state.saved[a.id].cooks||0); })
+    .slice(0, 8).map(function(r){ return r.name; });
+  var dropped = Object.keys(state.expired).map(recipeById).filter(Boolean).map(function(r){ return r.name; });
+  var avoid = allRecipes().map(function(r){ return r.name; });
+  var prots = selected("proteins").map(function(id){
+    for(var i=0;i<PROTEINS.length;i++) if(PROTEINS[i].id === id) return PROTEINS[i].n; return null;
+  }).filter(Boolean);
+  var prompt = [
+    "Write recipes for a skilled home cook on a lean bulk: 5'11\", about 150 lb, eating " + state.cal + " kcal a day with at least 160 g protein.",
+    pantry && pantry.length
+      ? "Write exactly 3 NEW recipes built mainly from ingredients they already have: " + pantry.join(", ") + ". Assume basic pantry items (oil, salt, spices, garlic, stock). Keep extra purchases to 1-3 cheap items per recipe. At least 2 should be dinners (800-1000 kcal, 45-65 g protein per serving); the third can be a dinner or a breakfast (600-750 kcal, at least 35 g protein)."
+      : "Write exactly 3 NEW recipes: 2 dinners (800-1000 kcal and 45-65 g protein per serving) and 1 breakfast (600-750 kcal, at least 35 g protein).",
+    "Use ingredients easy to find at Walmart and keep them budget-conscious. The cook is skilled, so real technique is welcome.",
+    favs.length ? "Recipes they cook most, best first: " + favs.join("; ") + ". Lean toward similar flavours and techniques without repeating them." : "They have not saved favourites yet, so vary the cuisines.",
+    dropped.length ? "These were suggested and they passed on them, so steer away from that style: " + dropped.slice(0, 12).join("; ") + "." : "",
+    prots.length ? "Proteins they buy: " + prots.join(", ") + "." : "",
+    "Do not repeat or lightly rename any of these: " + avoid.join("; ") + ".",
+    "Macros are per serving; ingredient quantities are for the full batch; 6-12 ingredients each; method is 3-5 sentences.",
+    'Return ONLY JSON, no prose or code fences, exactly this shape: {"recipes":[{"name":"","meal":"dinner","serves":2,"cal":900,"p":55,"f":35,"c":85,"ingredients":[""],"method":""}]}'
+  ].filter(Boolean).join("\n");
+
+  genCtl = new AbortController();
+  sampleFn.json(prompt, { cache: false, signal: genCtl.signal }).then(function(data){
+    var list = data && Array.isArray(data.recipes) ? data.recipes : [];
+    var added = 0, t = Date.now();
+    list.slice(0, 4).forEach(function(x, i){
+      var r = cleanRecipe(x); if(!r) return;
+      r.id = "ai-" + t + "-" + i; r.created = t + i; r.ai = true;
+      state.aiRecipes[r.id] = r; state.recs[r.id] = todayKey(); added++;
+    });
+    state.justRotated = 0;
+    genMsg = added ? (added + " new idea" + (added === 1 ? "" : "s") + " added below.") : "That came back empty \u2014 try again.";
+    persist();
+  }).catch(function(e){
+    var c = e && e.code;
+    if(c === "not_granted"){ sampleFn = null; genMsg = ""; }
+    else if(c === "cancelled"){ genMsg = ""; }
+    else if(c === "rate_limited"){ genMsg = "Too many requests right now \u2014 try again in a minute."; }
+    else { genMsg = "Couldn't get new ideas just now. Try again."; }
+  }).then(function(){ genBusy = false; genCtl = null; renderFood(); });
+}
+
+function mk(tag, cls, text){ var e = document.createElement(tag); if(cls) e.className = cls; if(text != null) e.textContent = text; return e; }
+
+function recipeCard(r){
+  var s = state.saved[r.id], open = state.openRecipe === r.id;
+  var card = mk("div", "card rc");
+  var head = mk("div", "rchead");
+
+  var tap = mk("button", "rctap");
+  tap.setAttribute("aria-expanded", open ? "true" : "false");
+  tap.appendChild(mk("b", null, r.name));
+  var meta = mk("div", "rm");
+  meta.appendChild(mk("span", "num", r.cal + " \u00b7 " + r.p + "P " + r.f + "F " + r.c + "C"));
+  if(!s && state.recs[r.id]){
+    var left = recDaysLeft(r.id);
+    if(daysSince(state.recs[r.id]) < REC_NEW) meta.appendChild(mk("span", "rtag new", "New"));
+    else if(left <= 5) meta.appendChild(mk("span", "rtag fade", left <= 1 ? "Leaves tomorrow" : "Leaves in " + left + "d"));
+  }
+  if(s){
+    if((s.cooks || 0) >= 3) meta.appendChild(mk("span", "rtag hot", "Cooked " + s.cooks + "\u00d7"));
+    else if(s.cooks) meta.appendChild(mk("span", "rtag", "Cooked " + s.cooks + "\u00d7"));
+  }
+  var ck = state.checks[r.id];
+  if(ck && ck.length) meta.appendChild(mk("span", "rtag", ck.length + "/" + r.ing.length + " ready"));
+  meta.appendChild(mk("span", null, open ? "\u25b4" : "\u25be"));
+  tap.appendChild(meta);
+  tap.addEventListener("click", function(){ state.openRecipe = open ? null : r.id; renderFood(); });
+
+  var heart = mk("button", "heart", s ? "\u2665" : "\u2661");
+  heart.setAttribute("aria-pressed", s ? "true" : "false");
+  heart.setAttribute("aria-label", s ? "Remove from saved" : "Save recipe");
+  heart.addEventListener("click", function(){
+    if(s) unsaveRecipe(r.id); else saveRecipe(r.id);
+    persist(); renderFood();
+  });
+
+  head.appendChild(tap); head.appendChild(heart);
+  card.appendChild(head);
+  if(!open) return card;
+
+  var det = mk("div", "rdet");
+  det.appendChild(mk("p", "sv num", "Serves " + r.serves + " \u00b7 macros per serving"));
+
+  var ih = mk("div", "ihead");
+  ih.appendChild(mk("h3", null, "Ingredients"));
+  var done = (state.checks[r.id] || []);
+  ih.appendChild(mk("span", "num", done.length + "/" + r.ing.length));
+  if(done.length){
+    var rs = mk("button", "link", "Reset");
+    rs.addEventListener("click", function(){ delete state.checks[r.id]; persist(); renderFood(); });
+    ih.appendChild(rs);
+  }
+  det.appendChild(ih);
+
+  var ul = mk("ul", "ingl");
+  r.ing.forEach(function(txt, i){
+    var li = document.createElement("li");
+    var b = mk("button", "ingb");
+    var on = done.indexOf(i) !== -1;
+    b.setAttribute("aria-pressed", on ? "true" : "false");
+    b.appendChild(mk("span", "ck", on ? "\u2713" : ""));
+    b.appendChild(mk("span", "tx", txt));
+    b.addEventListener("click", function(){ toggleCheck(r.id, i); persist(); renderFood(); });
+    li.appendChild(b); ul.appendChild(li);
+  });
+  det.appendChild(ul);
+  if(done.length === r.ing.length) det.appendChild(mk("div", "allset", "Everything's out. Tap \u201cCooked it\u201d when it's on the plate."));
+
+  det.appendChild(mk("h3", null, "Method"));
+  det.appendChild(mk("p", "method", r.method));
+
+  var row = mk("div", "btnrow");
+  var cooked = mk("button", "primary", "Cooked it \u2713");
+  cooked.addEventListener("click", function(){
+    cookRecipe(r.id); state.openRecipe = null; persist(); renderFood();
+  });
+  row.appendChild(cooked);
+  if(!s){
+    var sv = mk("button", "ghost", "\u2661 Save");
+    sv.addEventListener("click", function(){ saveRecipe(r.id); persist(); renderFood(); });
+    row.appendChild(sv);
+  }
+  det.appendChild(row);
+
+  if(!s){
+    var nf = mk("button", "link", "Not for me \u2014 hide this");
+    nf.style.marginTop = "10px";
+    nf.addEventListener("click", function(){
+      if(state.hidden.indexOf(r.id) === -1) state.hidden.push(r.id);
+      delete state.recs[r.id]; refreshRecs();
+      state.openRecipe = null; persist(); renderFood();
+    });
+    det.appendChild(nf);
+    if(state.recs[r.id]) det.appendChild(mk("p", "note", "Not saved yet \u2014 it rotates out in " + Math.max(1, recDaysLeft(r.id)) + " day" + (recDaysLeft(r.id) === 1 ? "" : "s") + " unless you \u2661 it."));
+  } else {
+    det.appendChild(mk("p", "note", (s.cooks ? "Cooked " + s.cooks + "\u00d7, last " + (daysSince(s.last) === 0 ? "today" : daysSince(s.last) + " days ago") + "." : "Saved, not cooked yet.") + ""));
+  }
+  card.appendChild(det);
+  return card;
+}
+
+function renderFoodSeg(){
+  var seg = $("foodSeg"); seg.innerHTML = "";
+  var n = Object.keys(state.saved).length;
+  [["recipes","Recipes"],["lookup","Lookup"],["saved","Saved" + (n ? " (" + n + ")" : "")],["guide","Guide"]].forEach(function(p){
+    var b = mk("button", null, p[1]);
+    b.setAttribute("aria-selected", state.foodView === p[0] ? "true" : "false");
+    b.addEventListener("click", function(){ state.foodView = p[0]; state.openRecipe = null; renderFood(); window.scrollTo(0,0); });
+    seg.appendChild(b);
+  });
+  $("foodRecipes").hidden = state.foodView !== "recipes";
+  $("foodSaved").hidden = state.foodView !== "saved";
+  $("foodGuide").hidden = state.foodView !== "guide";
+  $("foodLookup").hidden = state.foodView !== "lookup";
+}
+
+function renderRecs(){
+  var box = $("foodRecipes"); box.innerHTML = "";
+
+  if(state.justRotated){
+    var bc = mk("div", "card");
+    bc.appendChild(mk("h2", null, "List refreshed"));
+    bc.appendChild(mk("p", "note", state.justRotated + " recipe" + (state.justRotated === 1 ? "" : "s") + " sat unsaved for " + REC_TTL + " days and rotated out. New ones took their place."));
+    bc.lastChild.style.margin = "0";
+    var br = mk("div", "btnrow");
+    if(sampleFn){
+      var gr = mk("button", "primary", "Get 3 more");
+      gr.addEventListener("click", generateIdeas); br.appendChild(gr);
+    }
+    var ok = mk("button", "ghost", "OK");
+    ok.addEventListener("click", function(){ state.justRotated = 0; persist(); renderFood(); });
+    br.appendChild(ok); bc.appendChild(br);
+    box.appendChild(bc);
+  }
+
+  var list = Object.keys(state.recs).map(recipeById).filter(Boolean)
+    .sort(function(a, b){ return state.recs[a.id] < state.recs[b.id] ? 1 : (state.recs[a.id] > state.recs[b.id] ? -1 : 0); });
+
+  box.appendChild(mk("div", "sechead", "This rotation"));
+  if(list.length){
+    list.forEach(function(r){ box.appendChild(recipeCard(r)); });
+  } else {
+    var ec = mk("div", "card");
+    ec.appendChild(mk("p", "note", sampleFn ? "You've saved or passed on everything. Get new recipes below." : "You've saved or passed on everything \u2014 check back as older picks rotate back in."));
+    ec.lastChild.style.margin = "0";
+    box.appendChild(ec);
+  }
+
+  var hc = mk("div", "card");
+  hc.appendChild(mk("h2", null, "How this list works"));
+  hc.appendChild(mk("p", "note", "Anything you don't \u2661 within " + REC_TTL + " days rotates out and gets replaced. \u2661 or \u201cCooked it\u201d moves a recipe to Saved for good. \u201cNot for me\u201d swaps it out immediately."));
+  hc.lastChild.style.margin = "0";
+  if(sampleFn){
+    var gb = mk("button", "primary", genBusy ? "Working\u2026" : "Get 3 new recipes");
+    gb.style.marginTop = "12px"; gb.disabled = genBusy;
+    gb.addEventListener("click", generateIdeas);
+    hc.appendChild(gb);
+    if(genBusy && genCtl){
+      var stop = mk("button", "link", "Stop");
+      stop.addEventListener("click", function(){ if(genCtl) genCtl.abort(); });
+      hc.appendChild(stop);
+    }
+    if(genMsg) hc.appendChild(mk("div", "saved", genMsg));
+    hc.appendChild(mk("p", "note", "New recipes are built from what you've saved, what you've passed on, and your calorie target."));
+  }
+  box.appendChild(hc);
+
+  if(state.hidden.length){
+    var uh = mk("button", "link", "Un-hide " + state.hidden.length + " recipe" + (state.hidden.length === 1 ? "" : "s") + " you marked \u201cNot for me\u201d");
+    uh.style.margin = "0 2px 12px";
+    uh.addEventListener("click", function(){ state.hidden = []; refreshRecs(); persist(); renderFood(); });
+    box.appendChild(uh);
+  }
+}
+
+function renderSaved(){
+  var box = $("foodSaved"); box.innerHTML = "";
+  var ids = Object.keys(state.saved).filter(function(id){ return recipeById(id); });
+  if(!ids.length){
+    var ec = mk("div", "card");
+    ec.appendChild(mk("h2", null, "No favorites yet"));
+    ec.appendChild(mk("p", "note", "Tap \u2661 on any recipe, or hit \u201cCooked it\u201d \u2014 cooking something saves it automatically. Saved recipes stay here for good."));
+    ec.lastChild.style.margin = "0";
+    box.appendChild(ec);
+  } else {
+    ids.sort(function(a, b){
+      var ca = state.saved[a].cooks || 0, cb = state.saved[b].cooks || 0;
+      if(cb !== ca) return cb - ca;
+      var la = state.saved[a].last || state.saved[a].savedAt, lb = state.saved[b].last || state.saved[b].savedAt;
+      return la < lb ? 1 : (la > lb ? -1 : 0);
+    });
+    box.appendChild(mk("div", "sechead", "Most cooked first"));
+    ids.forEach(function(id){ box.appendChild(recipeCard(recipeById(id))); });
+  }
+
+}
+
+/* =================== LOOKUP: what can I make with what I have? =================== */
+var SYN = {
+  chicken:["chicken","thigh","breast"], beef:["beef","chuck","steak","sirloin"], steak:["steak","sirloin"],
+  pasta:["pasta","pappardelle","orzo","noodle","spaghetti","penne"], noodle:["noodle"],
+  cheese:["cheese","parmesan","feta","american","cheddar","mozzarella"], egg:["egg"],
+  rice:["rice","basmati"], potato:["potato"], yogurt:["yogurt","yoghurt"], oat:["oat"],
+  bread:["bread","sourdough","bun","toast","tortilla"], tortilla:["tortilla"], bean:["bean"],
+  tomato:["tomato","tomatoes"], pepper:["red pepper","bell pepper"], salmon:["salmon"], fish:["salmon","fish","cod","tilapia"],
+  pork:["pork"], chorizo:["chorizo"], milk:["milk"], cream:["cream"], nut:["nut","peanut","walnut","pistachio","almond"],
+  "peanut butter":["peanut butter"], "ground beef":["ground beef"]
+};
+var BASICS = ["oil","salt","pepper flakes","black pepper","garlic","cumin","paprika","oregano","chilli","turmeric","garam masala","cinnamon","spices","stock","flaky salt","hot sauce","vinegar","soy sauce","honey"];
+var QUICK = ["chicken","rice","eggs","ground beef","potatoes","pasta","oats","salmon","pork","tomatoes","cheese","Greek yogurt","beans","tortillas","bread","milk"];
+
+function normTerm(t){
+  t = String(t).toLowerCase().trim().replace(/\s+/g, " ");
+  if(t.length > 3 && /oes$/.test(t)) t = t.slice(0, -2);
+  else if(t.length > 3 && /s$/.test(t) && !/ss$/.test(t)) t = t.slice(0, -1);
+  return t;
+}
+function escRe(s){ return s.replace(/[.*+?^${}()|[\]\\]/g, "\\$&"); }
+function termMatches(term, line){
+  var l = line.toLowerCase(), words = SYN[term] || [term];
+  if(words.indexOf(term) === -1) words = words.concat([term]);
+  return words.some(function(w){ return new RegExp("(^|[^a-z])" + escRe(w)).test(l); });
+}
+function isBasic(line){
+  var l = line.toLowerCase();
+  return BASICS.some(function(b){ return new RegExp("(^|[^a-z])" + escRe(b)).test(l); });
+}
+function shortIng(line){
+  var s = line.replace(/\(.*?\)/g, "")
+    .replace(/^[\d\s\/.,~\u00bd\u00bc\u00be-]+/, "")
+    .replace(/^(lb|lbs|oz|g|kg|cups?|tbsp|tsp|large|small|medium|big|thick|bunch|cans?|slices?|handfuls?|pinch of|scoop|knob of|clamshell|fillets?|sticks?)\b\s*/i, "")
+    .replace(/^(of|a)\s+/i, "")
+    .split(/,| \+ | or /)[0].trim();
+  return s.length > 26 ? s.slice(0, 24) + "\u2026" : s;
+}
+function lookupResults(){
+  var raw = (state.pantry || []).filter(Boolean), terms = raw.map(normTerm);
+  if(!terms.length) return [];
+  var basics = state.pantryBasics !== false;
+  var seen = {};
+  return allRecipes().concat(RECIPES).filter(function(r){
+    if(seen[r.id] || state.hidden.indexOf(r.id) !== -1) return false;
+    seen[r.id] = true; return true;
+  }).map(function(r){
+    var used = [], have = 0, missing = [];
+    terms.forEach(function(t, i){ if(r.ing.some(function(l){ return termMatches(t, l); })) used.push(raw[i]); });
+    r.ing.forEach(function(l){
+      var hit = terms.some(function(t){ return termMatches(t, l); });
+      if(hit || (basics && isBasic(l))) have++;
+      else missing.push(shortIng(l));
+    });
+    return { r: r, used: used, have: have, total: r.ing.length, missing: missing };
+  }).filter(function(x){ return x.used.length > 0; })
+    .sort(function(a, b){
+      // using more of what you have matters most; each missing item counts against it
+      var sa = a.used.length * 5 - a.missing.length, sb = b.used.length * 5 - b.missing.length;
+      if(!a.missing.length !== !b.missing.length) return a.missing.length ? 1 : -1;
+      return (sb - sa) || (a.missing.length - b.missing.length);
+    });
+}
+function addPantry(raw){
+  String(raw).split(",").forEach(function(part){
+    var t = part.trim().toLowerCase().slice(0, 30);
+    if(!t) return;
+    state.pantry = state.pantry || [];
+    if(!state.pantry.some(function(p){ return normTerm(p) === normTerm(t); })) state.pantry.push(t);
+  });
+}
+
+function renderLookup(){
+  var box = $("foodLookup"); box.innerHTML = "";
+  var pantry = state.pantry || [];
+
+  var c = mk("div", "card");
+  c.appendChild(mk("h2", null, "What do you have?"));
+  var row = mk("div", "addex"); row.style.marginTop = "0";
+  var inp = document.createElement("input"); inp.type = "text";
+  inp.placeholder = "e.g. chicken, rice, eggs"; inp.setAttribute("enterkeyhint", "done");
+  var ab = mk("button", "ghost", "Add");
+  function go(){ if(!inp.value.trim()) return; addPantry(inp.value); persist(); renderLookup();
+    var ni = $("foodLookup").querySelector("input[type=text]"); if(ni) ni.focus(); }
+  ab.addEventListener("click", go);
+  inp.addEventListener("keydown", function(e){ if(e.key === "Enter"){ e.preventDefault(); go(); } });
+  row.appendChild(inp); row.appendChild(ab);
+  c.appendChild(row);
+
+  if(pantry.length){
+    var chips = mk("div", "qgrid"); chips.style.marginTop = "10px";
+    pantry.forEach(function(p, i){
+      var b = mk("button", null, p + "  \u00d7");
+      b.setAttribute("aria-pressed", "true");
+      b.setAttribute("aria-label", "Remove " + p);
+      b.addEventListener("click", function(){ state.pantry.splice(i, 1); persist(); renderLookup(); });
+      chips.appendChild(b);
+    });
+    c.appendChild(chips);
+    var clr = mk("button", "link", "Clear all");
+    clr.addEventListener("click", function(){ state.pantry = []; persist(); renderLookup(); });
+    c.appendChild(clr);
+  }
+
+  var quick = QUICK.filter(function(q){ return !pantry.some(function(p){ return normTerm(p) === normTerm(q); }); });
+  if(quick.length){
+    c.appendChild(mk("div", "sechead", "Quick add"));
+    c.lastChild.style.margin = "12px 0 7px";
+    var qg = mk("div", "qgrid");
+    quick.forEach(function(q){
+      var b = mk("button", null, "+ " + q);
+      b.addEventListener("click", function(){ addPantry(q); persist(); renderLookup(); });
+      qg.appendChild(b);
+    });
+    c.appendChild(qg);
+  }
+
+  var bl = mk("label", "basics");
+  var cb = document.createElement("input"); cb.type = "checkbox"; cb.checked = state.pantryBasics !== false;
+  cb.addEventListener("change", function(){ state.pantryBasics = cb.checked; persist(); renderLookup(); });
+  bl.appendChild(cb);
+  bl.appendChild(document.createTextNode(" I have the basics (oil, salt, garlic, spices, stock, soy sauce)"));
+  c.appendChild(bl);
+  box.appendChild(c);
+
+  if(!pantry.length){
+    var ec = mk("div", "card");
+    ec.appendChild(mk("p", "note", "Add what's in your fridge and cupboard. Recipes that use them show up here, ranked by how little you'd need to buy."));
+    ec.lastChild.style.margin = "0";
+    box.appendChild(ec);
+    return;
+  }
+
+  var res = lookupResults();
+  box.appendChild(mk("div", "sechead", res.length ? res.length + " recipe" + (res.length === 1 ? "" : "s") + " \u00b7 best match first" : "No matches yet"));
+  res.forEach(function(x){
+    var m = mk("div", "matchline");
+    if(!x.missing.length){ m.appendChild(mk("b", "ok", "You have everything")); }
+    else {
+      m.appendChild(mk("b", x.missing.length <= 2 ? "ok" : null, "Missing " + x.missing.length));
+      m.appendChild(document.createTextNode(": " + x.missing.slice(0, 4).join(", ") + (x.missing.length > 4 ? ", +" + (x.missing.length - 4) + " more" : "")));
+    }
+    m.appendChild(mk("span", null, " \u00b7 uses your " + x.used.join(", ")));
+    box.appendChild(m);
+    box.appendChild(recipeCard(x.r));
+  });
+  if(!res.length){
+    var nc = mk("div", "card");
+    nc.appendChild(mk("p", "note", "None of the recipes in the app use " + pantry.join(", ") + "." + (sampleFn ? " Have Claude write some that do:" : "")));
+    nc.lastChild.style.margin = "0";
+    box.appendChild(nc);
+  }
+
+  if(sampleFn){
+    var gc = mk("div", "card");
+    gc.appendChild(mk("h2", null, "Want more options?"));
+    gc.appendChild(mk("p", "note", "Get 3 new recipes built around what you have, keeping extra shopping to a minimum. They'll join your recipe rotation too."));
+    gc.lastChild.style.margin = "0";
+    var gb = mk("button", "primary", genBusy ? "Working\u2026" : "Get recipes using my ingredients");
+    gb.style.marginTop = "12px"; gb.disabled = genBusy;
+    gb.addEventListener("click", function(){ generateIdeas(pantry.slice()); });
+    gc.appendChild(gb);
+    if(genBusy && genCtl){
+      var stop = mk("button", "link", "Stop");
+      stop.addEventListener("click", function(){ if(genCtl) genCtl.abort(); });
+      gc.appendChild(stop);
+    }
+    if(genMsg) gc.appendChild(mk("div", "saved", genMsg));
+    box.appendChild(gc);
+  }
+}
+
+function renderFood(){ renderFoodSeg(); renderRecs(); renderSaved(); if(state.foodView === "lookup") renderLookup(); }
+
+
+/* =================== BACKUP =================== */
+var BACKUP_KEYS = ["logs","lifts","hist","sessions","pick","custom","pace","cal","startDate","prefs","budget","prices",
+                   "saved","checks","aiRecipes","recs","expired","hidden","pantry","pantryBasics"];
+var backupMsg = "", restorePending = null;
+function backupData(){
+  var o = { app: "winter-block", version: 1, exported: new Date().toISOString() };
+  BACKUP_KEYS.forEach(function(k){ if(state[k] !== undefined) o[k] = state[k]; });
+  return o;
+}
+function renderBackup(){
+  var box = $("backupBody"); if(!box) return;
+  box.innerHTML = "";
+  var days = Object.keys(state.logs).length, lifts = Object.keys(state.hist || {}).length, sess = state.sessions.length;
+  var st = mk("div", "grid");
+  [[days, "days logged"], [sess, "sessions"], [lifts, "lifts tracked"], [Object.keys(state.saved).length, "saved recipes"]].forEach(function(p){
+    var s = mk("div", "stat"); s.appendChild(mk("b", "num", String(p[0]))); s.appendChild(mk("span", null, p[1])); st.appendChild(s);
+  });
+  box.appendChild(st);
+  var where = mk("p", "note");
+  where.appendChild(mk("b", null, "\u2713 Saved on this phone"));
+  where.lastChild.style.color = "var(--accent2)";
+  where.appendChild(document.createTextNode(remote
+    ? "  \u00b7  \u2713 Synced to your Claude account" + (lastSync ? " (" + new Date(lastSync).toLocaleTimeString([], {hour:"numeric", minute:"2-digit"}) + ")" : "")
+    : "  \u00b7  Account sync not connected here"));
+  box.appendChild(where);
+  box.appendChild(mk("p", "note", "Everything you enter saves the moment you enter it and follows you to any device signed into your account. A backup file is extra insurance \u2014 keep one after big milestones."));
+
+  var row = mk("div", "btnrow");
+  if(downloadsFn){
+    var dl = mk("button", "primary", "Download backup");
+    dl.addEventListener("click", function(){
+      var name = "winter-block-backup-" + todayKey() + ".json";
+      downloadsFn.save({ filename: name, data: JSON.stringify(backupData(), null, 1) })
+        .then(function(){ backupMsg = "Backup saved as " + name; renderBackup(); })
+        .catch(function(e){
+          backupMsg = e && e.code === "declined" ? "" : (e && e.code === "rate_limited" ? "One moment \u2014 try again." : "Couldn't save the file here.");
+          if(e && (e.code === "unavailable" || e.code === "not_granted")) downloadsFn = null;
+          renderBackup();
+        });
+    });
+    row.appendChild(dl);
+  }
+  var file = document.createElement("input");
+  file.type = "file"; file.accept = ".json,application/json"; file.hidden = true;
+  file.addEventListener("change", function(){
+    var f = file.files && file.files[0]; if(!f) return;
+    var rd = new FileReader();
+    rd.onload = function(){
+      try{
+        var o = JSON.parse(String(rd.result));
+        if(!o || typeof o !== "object" || o.app !== "winter-block" || typeof o.logs !== "object") throw 0;
+        restorePending = o;
+        backupMsg = "Backup from " + String(o.exported || "").slice(0, 10) + " \u2014 " + Object.keys(o.logs).length + " days, " + (o.sessions || []).length + " sessions. Tap Confirm to replace what's here.";
+      }catch(err){ restorePending = null; backupMsg = "That file isn't a Winter Block backup."; }
+      renderBackup();
+    };
+    rd.readAsText(f);
+  });
+  var rs = mk("button", "ghost", restorePending ? "Confirm restore" : "Restore backup");
+  rs.addEventListener("click", function(){
+    if(!restorePending){ file.click(); return; }
+    var o = restorePending; restorePending = null;
+    BACKUP_KEYS.forEach(function(k){ if(o[k] !== undefined) state[k] = JSON.parse(JSON.stringify(o[k])); });
+    migrateTrain(); refreshRecs(); state.draft = null;
+    persist(); renderAll();
+    backupMsg = "Restored. Everything from the backup is back and syncing.";
+    renderBackup();
+  });
+  row.appendChild(rs);
+  box.appendChild(row);
+  box.appendChild(file);
+  if(backupMsg) box.appendChild(mk("div", "saved", backupMsg));
+}
+
+function renderAll(){ renderPace(); renderToday(); renderProgress(); renderTrain(); renderShop(); renderFood(); renderBackup(); }
+
+$("btnSave").addEventListener("click", function(){
+  var k = todayKey(), e = state.logs[k] || {};
+  function num(id){ var v = parseFloat($(id).value); return isNaN(v) ? undefined : v; }
+  var w = num("iW"), c = num("iC"), p = num("iP"), s = num("iS");
+  if(w !== undefined) e.w = w; if(c !== undefined) e.cal = c;
+  if(p !== undefined) e.p = p; if(s !== undefined) e.s = s;
+  state.logs[k] = e; persist(); renderToday(); renderProgress();
+  var m = $("savedMsg"); m.textContent = "Saved \u00b7 " + k;
+  setTimeout(function(){ m.textContent = ""; }, 2200);
+});
+
+
+function bumpCal(delta){
+  state.cal = Math.max(1800, Math.min(5000, state.cal + delta));
+  persist(); renderPace(); renderProgress();
+}
+$("calUp").addEventListener("click", function(){ bumpCal(100); });
+$("calDown").addEventListener("click", function(){ bumpCal(-100); });
+
+var tabs = document.querySelectorAll("nav button");
+for(var i=0;i<tabs.length;i++){
+  tabs[i].addEventListener("click", function(){
+    var v = this.dataset.v, self = this;
+    for(var j=0;j<tabs.length;j++) tabs[j].setAttribute("aria-selected", tabs[j] === self ? "true" : "false");
+    ["today","progress","food","train","shop"].forEach(function(n){ $("v-" + n).hidden = (n !== v); });
+    if(v === "progress") renderProgress();
+    if(v === "shop") renderShop();
+    if(v === "food") renderFood();
+    if(v === "train") renderTrain();
+    window.scrollTo(0,0);
+  });
+}
+
+$("themeBtn").addEventListener("click", function(){
+  var cur = document.documentElement.getAttribute("data-theme");
+  var next = cur === "dark" ? "light" : (cur === "light" ? "dark" : "light");
+  document.documentElement.setAttribute("data-theme", next);
+  try{ localStorage.setItem(LS + ".theme", next); }catch(e){}
+});
+try{ var th = localStorage.getItem(LS + ".theme"); if(th) document.documentElement.setAttribute("data-theme", th); }catch(e){}
+
+loadLocal();
+migrateTrain();
+refreshRecs(); saveLocal();
+renderAll();
+connect();
+
+})();
+</script>
+</body>
+</html>

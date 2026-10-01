@@ -1,0 +1,154 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Randolph Lemon Jr. | Projects</title>
+<meta name="description" content="Live demos of projects built by Randolph Lemon Jr., an IT and security-focused developer in Charleston, SC.">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🍋</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,500..800&family=Instrument+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#F3F5F7; --ink:#15202E; --slate:#556274; --harbor:#1D3557; --signal:#E0A526; --rule:#D5DBE2; --frame:#0F1724;
+  --display:"Archivo","Arial Narrow",Arial,sans-serif;
+  --body:"Instrument Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+  box-sizing:border-box;
+  padding-top:env(safe-area-inset-top,0px); padding-bottom:env(safe-area-inset-bottom,0px);
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){--paper:#121A25;--ink:#E7ECF2;--slate:#9AA7B8;--harbor:#8FB3E0;--rule:#2A3646;--frame:#05090F}
+}
+:root[data-theme="dark"]{--paper:#121A25;--ink:#E7ECF2;--slate:#9AA7B8;--harbor:#8FB3E0;--rule:#2A3646;--frame:#05090F}
+*,*::before,*::after{box-sizing:inherit}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;background:var(--paper);color:var(--ink);font:400 17px/1.6 var(--body);-webkit-font-smoothing:antialiased}
+a{color:var(--harbor);text-underline-offset:3px}
+a:focus-visible,button:focus-visible{outline:3px solid var(--signal);outline-offset:3px;border-radius:4px}
+.wrap{max-width:1120px;margin:0 auto;padding:0 24px}
+
+header.top{padding-block:72px 56px;border-bottom:1px solid var(--rule)}
+.name{font:800 clamp(44px,8vw,96px)/.92 var(--display);font-stretch:68%;letter-spacing:-.01em;margin:0}
+.role{font:500 clamp(18px,2.2vw,22px)/1.4 var(--display);font-stretch:100%;color:var(--slate);margin:18px 0 0;max-width:38ch}
+.links{display:flex;flex-wrap:wrap;gap:10px 22px;margin:28px 0 0;padding:0;list-style:none;font-weight:500}
+
+.project{display:grid;grid-template-columns:minmax(0,1fr) 340px;gap:56px;padding:72px 0;border-bottom:1px solid var(--rule)}
+.project h2{font:800 clamp(34px,5vw,56px)/1 var(--display);font-stretch:72%;margin:0}
+.lead{font:500 21px/1.45 var(--display);font-stretch:96%;margin:14px 0 0;max-width:34ch}
+.project h3{font:700 15px/1.3 var(--body);margin:36px 0 10px;color:var(--harbor)}
+.project p{margin:0;max-width:62ch}
+ol.steps{margin:0;padding:0;list-style:none;counter-reset:s;max-width:62ch}
+ol.steps li{counter-increment:s;display:grid;grid-template-columns:2.2em 1fr;padding:9px 0;border-top:1px solid var(--rule)}
+ol.steps li::before{content:counter(s);font:800 18px/1.5 var(--display);font-stretch:80%;color:var(--slate)}
+dl.impl{margin:0;display:grid;grid-template-columns:9.5em 1fr;gap:10px 18px;max-width:62ch}
+dl.impl dt{font-weight:600}
+dl.impl dd{margin:0;color:var(--ink)}
+.project .stack{margin-top:28px;color:var(--slate);font-size:15px}
+
+.demo{position:sticky;top:calc(24px + env(safe-area-inset-top,0px));align-self:start}
+.phone{width:340px;height:700px;border-radius:44px;background:var(--frame);padding:12px;box-shadow:0 30px 60px -30px rgba(15,23,36,.55)}
+.phone iframe{width:100%;height:100%;border:0;border-radius:33px;background:#fff;display:block}
+.demo-actions{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-top:16px;font-size:15px}
+.btn{display:inline-block;background:var(--harbor);color:var(--paper);padding:10px 16px;border-radius:8px;text-decoration:none;font-weight:600}
+.btn:hover{filter:brightness(1.12)}
+.note{color:var(--slate);font-size:14px;margin-top:10px;max-width:340px}
+
+p.m-demo{display:none}
+@media (max-width:900px){.project p.m-demo{display:block;margin-top:20px}}
+footer{padding-block:40px 56px;color:var(--slate);font-size:15px}
+
+@media (max-width:900px){
+  .project{grid-template-columns:1fr;gap:32px;padding:56px 0}
+  .demo{display:none}
+  header.top{padding-block:48px 40px}
+}
+@media (max-width:520px){ dl.impl{grid-template-columns:1fr;gap:2px} dl.impl dd{margin-bottom:12px} }
+</style>
+</head>
+<body>
+<header class="top wrap">
+  <h1 class="name">Randolph Lemon Jr.</h1>
+  <p class="role">IT and security-focused developer in Charleston, SC. Computer Information Systems, University of South Carolina, 2026.</p>
+  <ul class="links">
+    <li><a href="Randolph_Lemon_Resume.pdf">Resume (PDF)</a></li>
+    <li><a href="https://www.linkedin.com/in/randolph-lemon">LinkedIn</a></li>
+    <li><a href="mailto:rjlemon334@gmail.com">rjlemon334@gmail.com</a></li>
+  </ul>
+</header>
+
+<main class="wrap">
+  <section class="project" id="tally" aria-labelledby="tally-h">
+    <div>
+      <h2 id="tally-h">Tally</h2>
+      <p class="lead">A private budgeting app that tells you where each paycheck should go.</p>
+      <p class="m-demo"><a class="btn" href="demos/tally/">Open the demo</a></p>
+
+      <h3>Goal</h3>
+      <p>I wanted a budget that works from real paychecks instead of a monthly guess, without handing my bank login to a third-party app. Everything stays on the device, and an optional passcode encrypts it.</p>
+
+      <h3>How I built it</h3>
+      <ol class="steps">
+        <li>Designed the budget model: fixed bills come out first, then percentage categories split what's left. Variable categories default to the last three months' average.</li>
+        <li>Built six views (Month, Money, Plan, 90 Day, Goals, Worth) as a single-file web app with no framework.</li>
+        <li>Added local-first storage, then optional encryption using the browser's Web Crypto API.</li>
+        <li>Wrote a CSV parser so bank exports import directly, handling different date formats and negative amounts in parentheses.</li>
+        <li>Added encrypted backups and auto-lock, then tested the restore paths.</li>
+      </ol>
+
+      <h3>Implementation</h3>
+      <dl class="impl">
+        <dt>Encryption</dt><dd>PBKDF2-SHA256 with 310,000 iterations and a random 16-byte salt derives an AES-256-GCM key. Every save uses a fresh 12-byte IV.</dd>
+        <dt>Access control</dt><dd>Locks after 5 minutes in the background. A wrong passcode simply fails decryption, so no password hash is stored.</dd>
+        <dt>Input safety</dt><dd>All user text is escaped before rendering to block injected HTML.</dd>
+        <dt>Planning</dt><dd>Savings goals with contributions, a 90-day savings run with custom rules, and net-worth history.</dd>
+      </dl>
+      <p class="stack">JavaScript, HTML, CSS, Web Crypto API, localStorage</p>
+    </div>
+    <aside class="demo" aria-label="Tally live demo">
+      <div class="phone"><iframe src="demos/tally/" title="Tally demo" loading="lazy"></iframe></div>
+      <div class="demo-actions"><a class="btn" href="demos/tally/">Open full demo</a></div>
+      <p class="note">Runs on sample data. In the demo, open the lock icon and set a passcode to see encryption at work.</p>
+    </aside>
+  </section>
+
+  <section class="project" id="winter-block" aria-labelledby="wb-h">
+    <div>
+      <h2 id="wb-h">Winter Block</h2>
+      <p class="lead">A training and nutrition tracker built to take me from 150 to 157 lb by the first day of winter.</p>
+      <p class="m-demo"><a class="btn" href="demos/winter-block/">Open the demo</a></p>
+
+      <h3>Goal</h3>
+      <p>Daily weight swings 2–3 lb on water alone, so I wanted a tracker that reacts only to real trends, adjusts calories by rule instead of mood, and shows whether strength is moving with the scale.</p>
+
+      <h3>How I built it</h3>
+      <ol class="steps">
+        <li>Set up the pace math: three paces (0.4, 0.5 and 0.75 lb a week), each with its own calorie target, counting down to December 21.</li>
+        <li>Built the daily log and a 7-day moving average so the trend, not the daily number, drives decisions.</li>
+        <li>Wrote the adjustment rules: a flat 4-week average adds 200 calories, gaining too fast removes 200, on pace holds.</li>
+        <li>Added a training log with a 40-exercise library by muscle group, per-lift history, and detection of lifts that beat last session.</li>
+        <li>Added meal planning, a budgeted grocery list and AI recipe ideas, then offline storage with account sync and JSON backups.</li>
+      </ol>
+
+      <h3>Implementation</h3>
+      <dl class="impl">
+        <dt>Charts</dt><dd>Drawn in SVG: daily weigh-ins, the 7-day average, and the target pace line.</dd>
+        <dt>Nutrition</dt><dd>Protein and fat stay fixed; carbohydrates absorb every calorie change.</dd>
+        <dt>Storage</dt><dd>Saves to the device instantly and syncs to account storage after a short debounce, so it works offline.</dd>
+        <dt>AI recipes</dt><dd>Requests recipes from Claude as structured JSON, with cancel support for slow requests.</dd>
+      </dl>
+      <p class="stack">JavaScript, HTML, CSS, SVG</p>
+    </div>
+    <aside class="demo" aria-label="Winter Block live demo">
+      <div class="phone"><iframe src="demos/winter-block/" title="Winter Block demo" loading="lazy"></iframe></div>
+      <div class="demo-actions"><a class="btn" href="demos/winter-block/">Open full demo</a></div>
+      <p class="note">Runs on five weeks of sample logs. AI recipes and account sync are off in the demo.</p>
+    </aside>
+  </section>
+</main>
+
+<footer class="wrap">
+  <p>Demos save only to your own browser. Use Reset demo at the top of either app to start over.</p>
+</footer>
+</body>
+</html>
